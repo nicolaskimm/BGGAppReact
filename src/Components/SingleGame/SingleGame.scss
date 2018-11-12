@@ -1,0 +1,45 @@
+$primarFont: 'Raleway';
+$backColor: rgba(17, 17, 37, 0.877);
+$basicWhite: rgb(230, 219, 219);
+$pinkyColor: rgb(187, 45, 68);
+
+.singleGame {
+    display: flex;
+    width: 30%;
+    flex-direction: row;
+    margin: 20px;
+    font-size: 13.5px;
+
+    .photo {
+        height: 180px;
+        width: 135px;
+        margin-right: 20px;
+    }
+
+    .textInfo {
+        display: flex;
+        flex-direction: column;
+        
+        >p {
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-size: 17px;
+            color: rgb(187, 45, 68);
+        }
+
+        .notSelected {
+            background-color: $backColor;
+            border: 2px solid $pinkyColor;
+            height: 40px;
+            width: 40px;
+            outline: none;
+        }
+
+        .selected {
+            @extend .notSelected;
+            background-color: $pinkyColor;
+        }
+    }
+}

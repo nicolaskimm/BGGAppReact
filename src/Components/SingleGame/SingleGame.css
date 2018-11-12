@@ -1,0 +1,50 @@
+.singleGame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 20px;
+  font-size: 13.5px;
+}
+
+.singleGame .photo {
+  height: 180px;
+  width: 135px;
+  margin-right: 20px;
+}
+
+.singleGame .textInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.singleGame .textInfo > p {
+  margin-bottom: 10px;
+}
+
+.singleGame .textInfo .time {
+  font-size: 17px;
+  color: #bb2d44;
+}
+
+.singleGame .textInfo .notSelected, .singleGame .textInfo .selected {
+  background-color: rgba(17, 17, 37, 0.877);
+  border: 2px solid #bb2d44;
+  height: 40px;
+  width: 40px;
+  outline: none;
+}
+
+.singleGame .textInfo .selected {
+  background-color: #bb2d44;
+}
+/*# sourceMappingURL=SingleGame.css.map */

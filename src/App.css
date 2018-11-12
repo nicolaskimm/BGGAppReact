@@ -1,5 +1,120 @@
-.inputs {
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  width: 90vw;
-  flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 5px double #e6dbdb;
+  height: auto;
+  min-height: 70vh;
+  padding: 30px;
 }
+
+#root .searchButton, #root .clear {
+  background-color: transparent;
+  border: 1.5px solid #bb2d44;
+  color: #e6dbdb;
+  outline: none;
+}
+
+#root .inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 30px 0 30px;
+}
+
+#root .inputs .nick, #root .inputs .time, #root .inputs .players {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.3px solid #bb2d44;
+  width: 140px;
+  -webkit-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+  color: #e6dbdb;
+  text-align: center;
+}
+
+#root .inputs .nick::-webkit-input-placeholder, #root .inputs .time::-webkit-input-placeholder, #root .inputs .players::-webkit-input-placeholder {
+  color: rgba(133, 133, 197, 0.719);
+}
+
+#root .inputs .nick:hover, #root .inputs .time:hover, #root .inputs .players:hover {
+  width: 180px;
+}
+
+#root .inputs .nick:hover::-webkit-input-placeholder, #root .inputs .time:hover::-webkit-input-placeholder, #root .inputs .players:hover::-webkit-input-placeholder {
+  -webkit-transition: 1.3s;
+  transition: 1.3s;
+  color: transparent;
+}
+
+#root .inputs .nick:focus, #root .inputs .time:focus, #root .inputs .players:focus {
+  outline: none;
+}
+
+#root .inputs > * {
+  margin: 0 10px;
+}
+
+#root .buttonSection {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: auto;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 50px 0 100px;
+}
+
+#root .buttonSection .random, #root .buttonSection .notPlayed, #root .buttonSection .played {
+  background-color: transparent;
+  border: 1.5px solid #bb2d44;
+  color: #e6dbdb;
+  outline: none;
+  font-size: 30px;
+  color: #e6dbdb;
+  margin: 0 10px;
+}
+
+#root .totalTime {
+  font-size: 50px;
+  color: #bb2d44;
+}
+
+#root .results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 85vw;
+}
+
+#root .results .gameCollection {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+/*# sourceMappingURL=App.css.map */
