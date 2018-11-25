@@ -1,2 +1,9 @@
 node_modules
 package-lock.json
+src\App.css.map
+src\index.css.map
+src\App.scss
+src\index.scss.map
+src\Components\SingleGame\SingleGame.scss
+src\Components\SingleGame\SingleGame.css.map
+src\sass filess\SingleGame.css.map

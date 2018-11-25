@@ -11,15 +11,9 @@
           flex-direction: column;
   border: 5px double #e6dbdb;
   height: auto;
+  width: 90vw;
   min-height: 70vh;
   padding: 30px;
-}
-
-#root .searchButton, #root .clear {
-  background-color: transparent;
-  border: 1.5px solid #bb2d44;
-  color: #e6dbdb;
-  outline: none;
 }
 
 #root .inputs {
@@ -33,7 +27,11 @@
   margin: 30px 0 30px;
 }
 
-#root .inputs .nick, #root .inputs .time, #root .inputs .players {
+#root .inputs > * {
+  margin: 0 10px;
+}
+
+#root .inputs .inputs_nick, #root .inputs .inputs_time, #root .inputs .inputs_players {
   background-color: transparent;
   border: none;
   border-bottom: 1.3px solid #bb2d44;
@@ -44,30 +42,36 @@
   text-align: center;
 }
 
-#root .inputs .nick::-webkit-input-placeholder, #root .inputs .time::-webkit-input-placeholder, #root .inputs .players::-webkit-input-placeholder {
+#root .inputs .inputs_nick::-webkit-input-placeholder, #root .inputs .inputs_time::-webkit-input-placeholder, #root .inputs .inputs_players::-webkit-input-placeholder {
   color: rgba(133, 133, 197, 0.719);
 }
 
-#root .inputs .nick:hover, #root .inputs .time:hover, #root .inputs .players:hover {
+#root .inputs .inputs_nick:hover, #root .inputs .inputs_time:hover, #root .inputs .inputs_players:hover {
   width: 180px;
 }
 
-#root .inputs .nick:hover::-webkit-input-placeholder, #root .inputs .time:hover::-webkit-input-placeholder, #root .inputs .players:hover::-webkit-input-placeholder {
+#root .inputs .inputs_nick:hover::-webkit-input-placeholder, #root .inputs .inputs_time:hover::-webkit-input-placeholder, #root .inputs .inputs_players:hover::-webkit-input-placeholder {
   -webkit-transition: 1.3s;
   transition: 1.3s;
   color: transparent;
 }
 
-#root .inputs .nick:focus, #root .inputs .time:focus, #root .inputs .players:focus {
+#root .inputs .inputs_nick:focus, #root .inputs .inputs_time:focus, #root .inputs .inputs_players:focus {
   outline: none;
 }
 
-#root .inputs > * {
-  margin: 0 10px;
+#root .inputs .inputs_button_search, #root .inputs .inputs_button_clear {
+  background-color: transparent;
+  border: 1.5px solid #bb2d44;
+  color: #e6dbdb;
+  outline: none;
 }
 
 #root .buttonSection {
   display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -77,7 +81,7 @@
   margin: 50px 0 100px;
 }
 
-#root .buttonSection .random, #root .buttonSection .notPlayed, #root .buttonSection .played {
+#root .buttonSection .buttonSection_random, #root .buttonSection .buttonSection_notPlayed, #root .buttonSection .buttonSection_played {
   background-color: transparent;
   border: 1.5px solid #bb2d44;
   color: #e6dbdb;
@@ -88,7 +92,15 @@
 }
 
 #root .totalTime {
-  font-size: 50px;
+  display: none;
+  text-align: center;
+  font-size: 30px;
+  color: #e6dbdb;
+  margin-bottom: 80px;
+}
+
+#root .totalTime span {
+  font-size: 45px;
   color: #bb2d44;
 }
 

@@ -1,0 +1,102 @@
+$primarFont: 'Raleway';
+$backColor: rgba(17, 17, 37, 0.877);
+$basicWhite: rgb(230, 219, 219);
+$pinkyColor: rgb(187, 45, 68);
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 5px double $basicWhite;
+    height: auto;
+    width: 90vw;
+    min-height: 70vh;
+    padding: 30px;
+
+    .inputs {
+        display: flex;
+        flex-direction: row;
+        margin: 30px 0 30px;
+
+        > * {
+            margin: 0 10px;
+        }
+    
+        .inputs_nick, .inputs_time, .inputs_players {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1.3px solid $pinkyColor;
+            width: 140px;
+            transition: all 0.6s ease-in-out;
+            color: $basicWhite;
+            text-align: center;
+            &::-webkit-input-placeholder {
+                color: rgba(133, 133, 197, 0.719);
+            }
+            &:hover {
+                width: 180px;
+                &::-webkit-input-placeholder {
+                    transition: 1.3s;
+                    color: transparent;
+                }
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .inputs_button_search, .inputs_button_clear {
+            background-color: transparent;
+            border: 1.5px solid $pinkyColor;
+            color: $basicWhite;
+            outline: none;
+        }
+    }
+   
+    .buttonSection {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        letter-spacing: 2px;
+        text-align: center;
+        margin: 50px 0 100px;
+
+        .buttonSection_random, .buttonSection_notPlayed, .buttonSection_played {
+            background-color: transparent;
+            border: 1.5px solid $pinkyColor;
+            color: $basicWhite;
+            outline: none;
+            font-size: 30px;
+            color: $basicWhite;
+            margin: 0 10px;
+        }
+    }
+
+    .totalTime {
+        display: none;
+        text-align: center;
+        font-size: 30px;
+        color: $basicWhite;
+        margin-bottom: 80px;
+
+        span {
+            font-size: 45px;
+            color: $pinkyColor;
+        }
+    }
+        
+    .results {
+        display: flex;
+        align-items: center;
+        width: 85vw;
+
+        .gameCollection {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
+}
