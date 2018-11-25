@@ -51,10 +51,10 @@ class App extends React.Component {
   }
 
   handleClick(){ 
-    const prefix = 'https://cors-anywhere.herokuapp.com/';
+    //const prefix = 'https://cors-anywhere.herokuapp.com/';
 
     const req = new XMLHttpRequest();
-    req.open("GET", prefix + 'https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
+    req.open("GET", 'https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
     req.send();
 
     const text = req.responseText;

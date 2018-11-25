@@ -7,7 +7,6 @@ BGGApp is a simple search-engine which can help you choose game based on the tim
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Contact](#contact)
 
 ## General info
 This app was made for two purposes: to practice my code skills in React and API and of course to help players with the most urgent problem: WHAT CAN I PUT ON MY TABLE AND PLAY. It's using info about your game collection and number of plays from your BoardGameGeek account. 
@@ -35,7 +34,6 @@ Ready:
 
 To-do:
 * Sort games based on the play date
-
 
 ## Status
 Project is: in progress.

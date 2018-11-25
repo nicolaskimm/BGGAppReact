@@ -1,15 +1,16 @@
-var express = require('express');
-var app = express();
-var port = 3000;
-var path = require('path');
-var cors = require('cors');
+const express = require('express');
+const app = express();
+const port = 3000;
+const path = require('path');
+const cors = require('cors');
 
 app.use(cors());
+app.use(express.static('./build'));
 
 app.get('*', function(req, res){
-    res.sendFile(path.resolve(__dirname, 'public/index.html'));
-});
+    res.sendfile('../public/index.html');
+})
 
 app.listen(port, function(){
-	console.log('listening on *:3000');
+	console.log(`listening on port 3000`);
 });
