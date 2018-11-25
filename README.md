@@ -4,6 +4,7 @@ BGGApp is a simple search-engine which can help you choose game based on the tim
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
@@ -13,7 +14,7 @@ BGGApp is a simple search-engine which can help you choose game based on the tim
 This app was made for two purposes: to practice my code skills in React and API and of course to help players with the most urgent problem: WHAT CAN I PUT ON MY TABLE AND PLAY. It's using info about your game collection and number of plays from your BoardGameGeek account. 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![ezgif com-gif-maker 1](https://user-images.githubusercontent.com/32582359/48980354-0d2d5400-f0c8-11e8-80d6-6b947f6f4b96.gif)
 
 ## Technologies
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
