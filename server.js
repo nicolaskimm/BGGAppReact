@@ -5,10 +5,10 @@ const path = require('path');
 const cors = require('cors');
 
 app.use(cors());
-app.use(express.static('./build'));
+app.use(express.static('./build', './index.html'));
 
 app.get('*', function(req, res){
-    res.sendfile('../public/index.html');
+    res.sendfile('./index.html');
 })
 
 app.listen(port, function(){
