@@ -1,20 +1,44 @@
 .singleGame {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 30%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin: 20px;
   font-size: 13.5px;
+}
+
+@media screen and (max-width: 699px) {
+  .singleGame {
+    width: 100%;
+  }
 }
 
 .singleGame .photo {
   height: 180px;
   width: 135px;
   margin-right: 20px;
+}
+
+@media screen and (max-width: 1101px) {
+  .singleGame .photo {
+    height: 140px;
+    width: 95px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 509px) {
+  .singleGame .photo {
+    display: none;
+  }
 }
 
 .singleGame .textInfo {
@@ -25,10 +49,36 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (max-width: 699px) {
+  .singleGame .textInfo {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .singleGame .textInfo * {
+    width: calc(100%/5);
+    text-align: center;
+  }
 }
 
 .singleGame .textInfo > p {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+}
+
+@media screen and (max-width: 1101px) {
+  .singleGame .textInfo > p {
+    margin: 0 0 5px;
+  }
+}
+
+@media screen and (max-width: 509px) {
+  .singleGame .textInfo > p {
+    font-size: 11px;
+  }
 }
 
 .singleGame .textInfo .textInfo_time {
@@ -36,8 +86,14 @@
   color: #bb2d44;
 }
 
+@media screen and (max-width: 509px) {
+  .singleGame .textInfo .textInfo_time {
+    font-size: 13px;
+  }
+}
+
 .singleGame .textInfo .notSelected, .singleGame .textInfo .selected {
-  background-color: rgba(17, 17, 37, 0.877);
+  background-color: rgba(12, 18, 36, 0);
   border: 2px solid #bb2d44;
   height: 40px;
   width: 40px;

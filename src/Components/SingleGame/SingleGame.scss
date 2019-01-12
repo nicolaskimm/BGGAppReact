@@ -1,36 +1,73 @@
 $primarFont: 'Raleway';
-$backColor: rgba(17, 17, 37, 0.877);
+$backColor: rgba(12, 18, 36, 0.877);
 $basicWhite: rgb(230, 219, 219);
 $pinkyColor: rgb(187, 45, 68);
 
 .singleGame {
+    box-sizing: border-box;
     display: flex;
+    align-items: center;
     width: 30%;
     flex-direction: row;
-    margin: 20px;
     font-size: 13.5px;
+
+    @media screen and (max-width: 699px) {
+        width: 100%;
+    }
 
     .photo {
         height: 180px;
         width: 135px;
         margin-right: 20px;
+
+        @media screen and (max-width: 1101px) {
+            height: 140px;
+            width: 95px;
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 509px) {
+            display: none;
+        }
     }
 
     .textInfo {
         display: flex;
         flex-direction: column;
+        width: 100%;
+
+        @media screen and (max-width: 699px) {
+            flex-direction: row;
+
+            * {
+                width: calc(100%/5);
+                text-align: center;
+            }
+        }
         
         >p {
-            margin-bottom: 10px;
+            margin: 0 0 10px;
+
+            @media screen and (max-width: 1101px) {
+                margin: 0 0 5px;
+            }
+
+            @media screen and (max-width: 509px) {
+                font-size: 11px;
+            }
         }
 
         .textInfo_time {
             font-size: 17px;
             color: rgb(187, 45, 68);
+
+            @media screen and (max-width: 509px) {
+                font-size: 13px;
+            }
         }
 
         .notSelected {
-            background-color: $backColor;
+            background-color: rgba(12, 18, 36, 0);
             border: 2px solid $pinkyColor;
             height: 40px;
             width: 40px;

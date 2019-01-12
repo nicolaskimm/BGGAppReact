@@ -41,7 +41,7 @@ class App extends React.Component {
         this.setState({nick: event.target.value});
         break;
       case "inputs_time":
-      this.setState({time: event.target.value});
+        this.setState({time: event.target.value});
         break;
       case "inputs_players":
         this.setState({players: event.target.value});
@@ -51,10 +51,16 @@ class App extends React.Component {
   }
 
   handleClick(){ 
-    //const prefix = 'https://cors-anywhere.herokuapp.com/';
+    const loader = document.querySelector('.loader');
+    loader.style.display= 'flex';
 
     const req = new XMLHttpRequest();
     req.open("GET", 'https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
+    req.onreadystatechange = function () {
+      if (req.readyState === 4 && req.status === 200){
+        loader.style.display = 'none';
+      } 
+    }
     req.send();
 
     const text = req.responseText;
@@ -64,7 +70,7 @@ class App extends React.Component {
     const itemsArray = Array.from(items);
     const Arrrr = [];
 
-    for (var x = 0 ; x <= itemsArray.length - 1 ; x++) {
+    for (let x = 0 ; x <= itemsArray.length - 1 ; x++) {
 
       const timeInput = parseInt(this.state.time);
       const playersInput = parseInt(this.state.players);
@@ -83,10 +89,11 @@ class App extends React.Component {
     const totalTime = document.querySelector('.totalTime');
     buttonSection.style.display = 'flex';
     totalTime.style.display = 'block';
+    loader.style.display = 'none';
   }
 
   checkForSelection(e) {
-    const parentEl = e.target.parentNode;
+    const parentEl = e.target.parentNode.parentNode;
     const time = parseInt(parentEl.querySelector('.textInfo_time').innerHTML);
 
     if (e.target.className === 'selected') {
@@ -136,7 +143,7 @@ class App extends React.Component {
   render () {
    
     return (
-      <div>
+      <div className='app'>
         <div className='inputs'>
           <h1> Who are you? </h1>
           <input className='inputs_nick' placeholder='your nickname' value={this.state.nick} onChange={this.handleChange.bind(this)} />
@@ -144,8 +151,15 @@ class App extends React.Component {
           <input className='inputs_time' placeholder='only numbers!' value={this.state.time} onChange={this.handleChange.bind(this)} />
           <h1> How many people?</h1>
           <input className='inputs_players' placeholder='type the number' value={this.state.players} onChange={this.handleChange.bind(this)} />
-          <button className='inputs_button_search' onClick={this.handleClick.bind(this)}> <FontAwesomeIcon icon='search' /> </button>
-          <button className='inputs_button_clear' onClick={this.init.bind(this)}> x </button>
+          <div className='inputs_button'>
+            <button className='inputs_button_search' onClick={this.handleClick.bind(this)}> <FontAwesomeIcon icon='search' /> </button>
+            <button className='inputs_button_clear' onClick={this.init.bind(this)}> x </button>
+          </div>
+        </div>
+        <div className='loader'>
+          <div className='loader_dot1'></div>
+          <div className='loader_dot2'></div>
+          <div className='loader_dot3'></div>
         </div>
         <div className='buttonSection'>
           <h1>Something new<button className='buttonSection_notPlayed' onClick={this.checkForNumOfPlays.bind(this)}>></button></h1>

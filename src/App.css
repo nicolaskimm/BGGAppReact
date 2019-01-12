@@ -1,4 +1,20 @@
-#root {
+body {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9,14 +25,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 5px double #e6dbdb;
   height: auto;
-  width: 90vw;
   min-height: 70vh;
-  padding: 30px;
+  width: 100%;
 }
 
-#root .inputs {
+.app .inputs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,50 +38,212 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin: 30px 0 30px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px 5px;
+  height: auto;
 }
 
-#root .inputs > * {
+@media screen and (max-width: 599px) {
+  .app .inputs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 0;
+  }
+}
+
+.app .inputs h1 {
+  font-size: 30px;
+}
+
+@media screen and (max-width: 1586px) {
+  .app .inputs h1 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 1101px) {
+  .app .inputs h1 {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .inputs h1 {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .inputs h1 {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .app .inputs h1 {
+    margin: 0 0 10px;
+  }
+}
+
+.app .inputs > * {
   margin: 0 10px;
 }
 
-#root .inputs .inputs_nick, #root .inputs .inputs_time, #root .inputs .inputs_players {
+@media screen and (max-width: 1101px) {
+  .app .inputs > * {
+    margin: 0 8px;
+  }
+}
+
+.app .inputs .inputs_nick, .app .inputs .inputs_time, .app .inputs .inputs_players {
   background-color: transparent;
   border: none;
   border-bottom: 1.3px solid #bb2d44;
   width: 140px;
+  height: 80%;
   -webkit-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
   color: #e6dbdb;
   text-align: center;
 }
 
-#root .inputs .inputs_nick::-webkit-input-placeholder, #root .inputs .inputs_time::-webkit-input-placeholder, #root .inputs .inputs_players::-webkit-input-placeholder {
+.app .inputs .inputs_nick::-webkit-input-placeholder, .app .inputs .inputs_time::-webkit-input-placeholder, .app .inputs .inputs_players::-webkit-input-placeholder {
   color: rgba(133, 133, 197, 0.719);
 }
 
-#root .inputs .inputs_nick:hover, #root .inputs .inputs_time:hover, #root .inputs .inputs_players:hover {
+.app .inputs .inputs_nick:hover, .app .inputs .inputs_time:hover, .app .inputs .inputs_players:hover {
   width: 180px;
 }
 
-#root .inputs .inputs_nick:hover::-webkit-input-placeholder, #root .inputs .inputs_time:hover::-webkit-input-placeholder, #root .inputs .inputs_players:hover::-webkit-input-placeholder {
+.app .inputs .inputs_nick:hover::-webkit-input-placeholder, .app .inputs .inputs_time:hover::-webkit-input-placeholder, .app .inputs .inputs_players:hover::-webkit-input-placeholder {
   -webkit-transition: 1.3s;
   transition: 1.3s;
   color: transparent;
 }
 
-#root .inputs .inputs_nick:focus, #root .inputs .inputs_time:focus, #root .inputs .inputs_players:focus {
+.app .inputs .inputs_nick:focus, .app .inputs .inputs_time:focus, .app .inputs .inputs_players:focus {
   outline: none;
 }
 
-#root .inputs .inputs_button_search, #root .inputs .inputs_button_clear {
+@media screen and (max-width: 1101px) {
+  .app .inputs .inputs_nick, .app .inputs .inputs_time, .app .inputs .inputs_players {
+    width: 120px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .inputs .inputs_nick, .app .inputs .inputs_time, .app .inputs .inputs_players {
+    width: 100px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .inputs .inputs_nick, .app .inputs .inputs_time, .app .inputs .inputs_players {
+    width: 80px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .app .inputs .inputs_nick, .app .inputs .inputs_time, .app .inputs .inputs_players {
+    margin-bottom: 40px;
+  }
+}
+
+.app .loader {
+  width: 100%;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.app .loader div {
+  width: 30px;
+  height: 30px;
+  background-color: #bb2d44;
+  margin: 0 20px;
+  border-radius: 100%;
+}
+
+.app .loader .loader_dot1 {
+  -webkit-animation: loader 1s ease-in-out 0s infinite;
+          animation: loader 1s ease-in-out 0s infinite;
+}
+
+.app .loader .loader_dot2 {
+  -webkit-animation: loader 1s ease-in-out 0.2s infinite;
+          animation: loader 1s ease-in-out 0.2s infinite;
+}
+
+.app .loader .loader_dot3 {
+  -webkit-animation: loader 1s ease-in-out 0.4s infinite;
+          animation: loader 1s ease-in-out 0.4s infinite;
+}
+
+.app .inputs_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.app .inputs_button :first-child {
+  margin-right: 5px;
+}
+
+.app .inputs_button .inputs_button_search, .app .inputs_button .inputs_button_clear {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
   background-color: transparent;
   border: 1.5px solid #bb2d44;
   color: #e6dbdb;
   outline: none;
 }
 
-#root .buttonSection {
+@media screen and (max-width: 1586px) {
+  .app .inputs_button .inputs_button_search, .app .inputs_button .inputs_button_clear {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .inputs_button .inputs_button_search, .app .inputs_button .inputs_button_clear {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .app .inputs_button .inputs_button_search, .app .inputs_button .inputs_button_clear {
+    margin-bottom: 50px;
+  }
+}
+
+.app .buttonSection {
   display: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -75,13 +251,45 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: auto;
+  width: 100%;
+  font-size: 15px;
   letter-spacing: 2px;
   text-align: center;
   margin: 50px 0 100px;
 }
 
-#root .buttonSection .buttonSection_random, #root .buttonSection .buttonSection_notPlayed, #root .buttonSection .buttonSection_played {
+@media screen and (max-width: 1586px) {
+  .app .buttonSection {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 1101px) {
+  .app .buttonSection {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .buttonSection {
+    font-size: 6.7px;
+    letter-spacing: 0.4px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .buttonSection {
+    font-size: 6px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .app .buttonSection {
+    margin: 0 0 35px;
+  }
+}
+
+.app .buttonSection .buttonSection_random, .app .buttonSection .buttonSection_notPlayed, .app .buttonSection .buttonSection_played {
   background-color: transparent;
   border: 1.5px solid #bb2d44;
   color: #e6dbdb;
@@ -91,7 +299,25 @@
   margin: 0 10px;
 }
 
-#root .totalTime {
+@media screen and (max-width: 1586px) {
+  .app .buttonSection .buttonSection_random, .app .buttonSection .buttonSection_notPlayed, .app .buttonSection .buttonSection_played {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .buttonSection .buttonSection_random, .app .buttonSection .buttonSection_notPlayed, .app .buttonSection .buttonSection_played {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .buttonSection .buttonSection_random, .app .buttonSection .buttonSection_notPlayed, .app .buttonSection .buttonSection_played {
+    font-size: 10px;
+  }
+}
+
+.app .totalTime {
   display: none;
   text-align: center;
   font-size: 30px;
@@ -99,22 +325,58 @@
   margin-bottom: 80px;
 }
 
-#root .totalTime span {
+@media screen and (max-width: 1101px) {
+  .app .totalTime {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .totalTime {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .totalTime {
+    font-size: 15px;
+  }
+}
+
+.app .totalTime span {
   font-size: 45px;
   color: #bb2d44;
 }
 
-#root .results {
+@media screen and (max-width: 1101px) {
+  .app .totalTime span {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .app .totalTime span {
+    font-size: 35px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .app .totalTime span {
+    font-size: 30px;
+  }
+}
+
+.app .results {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 85vw;
+  width: 100vw;
 }
 
-#root .results .gameCollection {
+.app .results .gameCollection {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -128,5 +390,92 @@
           justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  padding: 0;
+}
+
+.app .results .gameCollection li {
+  margin: 20px;
+}
+
+@media screen and (max-width: 699px) {
+  .app .results .gameCollection li {
+    margin: 0 0 20px 5px;
+  }
+}
+
+.app .results .gameCollection li:nth-child(3n) {
+  margin-right: 0;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.4;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.2;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.4;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.2;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=App.css.map */
