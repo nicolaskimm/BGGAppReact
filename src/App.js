@@ -1,11 +1,7 @@
 import React from 'react';
-import './App.css'
+import './App.css';
 import GameCollection from './Components/GameCollection/GameCollection';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faSearch);
+import swal from 'sweetalert';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +14,6 @@ class App extends React.Component {
       time: '',
       totalTime: 0,
     }
-
     this.checkForSelection = this.checkForSelection.bind(this);
   }
 
@@ -32,7 +27,11 @@ class App extends React.Component {
       itemsFit: [],
     })
     const buttonSection = document.querySelector('.buttonSection');
+    const totalTime = document.querySelector('.totalTime');
+    const loader = document.querySelector('.loader');
     buttonSection.style.display = 'none';
+    loader.style.display = 'none';
+    totalTime.style.display = 'none';
   }
 
   handleChange(event) {    
@@ -50,28 +49,12 @@ class App extends React.Component {
     }
   }
 
-  handleClick(){ 
-    const loader = document.querySelector('.loader');
-    loader.style.display= 'flex';
-
-    const req = new XMLHttpRequest();
-    req.open("GET", 'https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
-    req.onreadystatechange = function () {
-      if (req.readyState === 4 && req.status === 200){
-        loader.style.display = 'none';
-      } 
-    }
-    req.send();
-
-    const text = req.responseText;
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(text, "text/xml");
+  createGameList(xmlDoc) {
     const items = xmlDoc.getElementsByTagName("item");  
     const itemsArray = Array.from(items);
     const Arrrr = [];
 
     for (let x = 0 ; x <= itemsArray.length - 1 ; x++) {
-
       const timeInput = parseInt(this.state.time);
       const playersInput = parseInt(this.state.players);
       const playTime = itemsArray[x].getElementsByTagName('stats')[0].getAttribute('playingtime');
@@ -82,16 +65,46 @@ class App extends React.Component {
         Arrrr.push(itemsArray[x]);
       } 
     }    
-
     this.setState({itemsFitMutable: Arrrr, itemsFit: Arrrr});
+  }
+  
 
+  handleClick(){ 
+    const self = this;
+    const loader = document.querySelector('.loader');
     const buttonSection = document.querySelector('.buttonSection');
     const totalTime = document.querySelector('.totalTime');
-    buttonSection.style.display = 'flex';
-    totalTime.style.display = 'block';
-    loader.style.display = 'none';
-  }
+    loader.style.display= 'flex';
 
+    const req = new XMLHttpRequest();
+    req.open("GET", 'https://cors-escape.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
+    req.onreadystatechange = function () {
+      loader.style.display = 'none';
+    }
+    req.send();
+
+    if (req.status === 200 ){    
+      buttonSection.style.display = 'flex';
+      totalTime.style.display = 'block';
+
+      const text = req.responseText;
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(text, "text/xml");
+
+      if (xmlDoc.getElementsByTagName("message")[0]) {
+        swal('oops..', 'Invalid username', 'error');
+        self.init();
+      } else if (xmlDoc.getElementsByTagName("item")) {
+        this.createGameList(xmlDoc);
+      }
+
+    } else if (req.status !== 200) {
+      swal('Ooops..', 'Something went wrong, please try again', 'error');
+      buttonSection.style.display = 'none';
+      totalTime.style.display = 'none';
+    }
+  }
+    
   checkForSelection(e) {
     const parentEl = e.target.parentNode.parentNode;
     const time = parseInt(parentEl.querySelector('.textInfo_time').innerHTML);
@@ -125,7 +138,6 @@ class App extends React.Component {
     }
 
     e.target.className === 'buttonSection_played' ? this.setState({itemsFitMutable: itemsPlayed}) : this.setState({itemsFitMutable: itemsNotPlayed});
-    
   }
 
   randomGame(){
@@ -152,8 +164,8 @@ class App extends React.Component {
           <h1> How many people?</h1>
           <input className='inputs_players' placeholder='type the number' value={this.state.players} onChange={this.handleChange.bind(this)} />
           <div className='inputs_button'>
-            <button className='inputs_button_search' onClick={this.handleClick.bind(this)}> <FontAwesomeIcon icon='search' /> </button>
-            <button className='inputs_button_clear' onClick={this.init.bind(this)}> x </button>
+            <button className='inputs_button_search' onClick={this.handleClick.bind(this)}> go </button>
+            <button className='inputs_button_clear' onClick={this.init.bind(this)}> clear </button>
           </div>
         </div>
         <div className='loader'>

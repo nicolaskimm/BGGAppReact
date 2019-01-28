@@ -1,7 +1,10 @@
-$primarFont: 'Raleway';
-$backColor: rgba(12, 18, 36, 0.877);
-$basicWhite: rgb(230, 219, 219);
-$pinkyColor: rgb(187, 45, 68);
+$basicWhite: hsl(0, 17%, 88%);
+$inputPlaceholder: hsla(240, 36%, 65%, 0.718);
+$loaderDot: hsl(350, 61%, 45%);
+$backColor: hsla(225, 50%, 9%, 0.877);
+$pinkyColor: hsl(350, 61%, 45%);
+
+
 
 body {
     width: 100vw;
@@ -75,7 +78,7 @@ body {
             color: $basicWhite;
             text-align: center;
             &::-webkit-input-placeholder {
-                color: rgba(133, 133, 197, 0.719);
+                color: $inputPlaceholder;
             }
             &:hover {
                 width: 180px;
@@ -119,7 +122,7 @@ body {
         div {
             width: 30px;
             height: 30px;
-            background-color: #bb2d44;
+            background-color: $loaderDot;
             margin: 0 20px;
             border-radius: 100%;
         }
@@ -143,47 +146,39 @@ body {
         justify-content: center;
         align-content: center;
 
+        @media screen and (max-width: 599px) {
+            margin-bottom: 35px;
+        }
+
         :first-child {
             margin-right: 5px;
         }
         
         .inputs_button_search, .inputs_button_clear {
-            display: flex;
-            justify-content: center;
-            width: 30px;
+            display: block;
+            align-self: center;
+            width: auto;
             height: 30px;
             font-size: 12px;
             background-color: transparent;
             border: 1.5px solid $pinkyColor;
             color: $basicWhite;
             outline: none;
-            
-            @media screen and (max-width: 1586px) {
-                width: 25px;
-                height: 25px;
-            }
-
-            @media screen and (max-width: 899px) {
-                width: 22px;
-                height: 22px;
-                font-size: 10px;
-            }
-
-            @media screen and (max-width: 599px) {
-                margin-bottom: 50px;
-            }
         }
     }
    
     .buttonSection {
         display: none;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
         width: 100%;
         font-size: 15px;
         letter-spacing: 2px;
         text-align: center;
         margin: 50px 0 100px;
+
+        .inputs_button_search-icon {
+            margin-right: 20px;
+        }
 
         @media screen and (max-width: 1586px) {
             font-size: 10px;
@@ -214,6 +209,11 @@ body {
             font-size: 30px;
             color: $basicWhite;
             margin: 0 10px;
+            transition: 1s;
+            &:hover {
+                background-color: $pinkyColor;
+                color: $backColor;
+            }
 
             @media screen and (max-width: 1586px) {
                 font-size: 20px;
@@ -285,10 +285,6 @@ body {
                 @media screen and (max-width: 699px) {
                     margin: 0 0 20px 5px;
                 }
-            }
-
-            li:nth-child(3n){
-                margin-right: 0;
             }
         }
     }

@@ -1,7 +1,7 @@
-$primarFont: 'Raleway';
-$backColor: rgba(12, 18, 36, 0.877);
-$basicWhite: rgb(230, 219, 219);
-$pinkyColor: rgb(187, 45, 68);
+$pinkyColor: hsl(350, 61%, 45%);
+$backColor: hsla(225, 50%, 9%, 0.877);
+$buttonBack: hsla(225, 50%, 9%, 0.4);
+
 
 .singleGame {
     box-sizing: border-box;
@@ -59,7 +59,7 @@ $pinkyColor: rgb(187, 45, 68);
 
         .textInfo_time {
             font-size: 17px;
-            color: rgb(187, 45, 68);
+            color: $pinkyColor;
 
             @media screen and (max-width: 509px) {
                 font-size: 13px;
@@ -67,11 +67,15 @@ $pinkyColor: rgb(187, 45, 68);
         }
 
         .notSelected {
-            background-color: rgba(12, 18, 36, 0);
+            background-color: $buttonBack;
             border: 2px solid $pinkyColor;
             height: 40px;
             width: 40px;
             outline: none;
+            transition: 1s;
+            &:hover {
+                background-color: $pinkyColor;
+            }
         }
 
         .selected {

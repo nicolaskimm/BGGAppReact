@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 $primarFont: 'Raleway';
-$backColor: rgba(12, 18, 36, 0.877);
-$basicWhite: rgb(230, 219, 219);
-$pinkyColor: rgb(187, 45, 68);
+$backColor: hsla(225, 50%, 9%, 0.877);
+$basicWhite: hsl(0, 18%, 88%);
+$pinkyColor: hsl(350, 61%, 45%);
 
 body {
     display: flex;
