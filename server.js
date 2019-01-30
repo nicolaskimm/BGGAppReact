@@ -5,12 +5,12 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 
 app.use(cors());
-app.use(express.static('build'));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function(req, res) {
-    res.sendFile('/index.html');
+    res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
 app.listen(port, function(){
-	console.log(`listening on port 3000`);
+	console.log(`listening on port ${port}`);
 });
