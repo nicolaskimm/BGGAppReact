@@ -19,7 +19,7 @@
   },
   "proxy": {
     "/": {
-      "target": "https://timeandboardgames.herokuapp.com/",
+      "target": "http://localhost:5000",
       "ws": true
     }
   },
