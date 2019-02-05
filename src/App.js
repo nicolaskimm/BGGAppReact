@@ -142,6 +142,8 @@ class App extends React.Component {
   }
 
   randomGame(){
+    const buttonSelected = document.querySelector('.textinfo_button-notSelected');
+    buttonSelected.style.display = 'none';
     const itemsLength = this.state.itemsFit.length;
     const result = Math.floor(Math.random() * (itemsLength));
     const item = [];
