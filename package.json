@@ -17,12 +17,6 @@
     "eject": "react-scripts eject",
     "postinstall": "npm run build"
   },
-  "proxy": {
-    "/": {
-      "target": "http://localhost:3000",
-      "ws": true
-    }
-  },
   "eslintConfig": {
     "extends": "react-app"
   },

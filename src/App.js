@@ -77,13 +77,11 @@ class App extends React.Component {
     loader.style.display= 'flex';
 
     const req = new XMLHttpRequest();
-    req.open("GET", 'https://cors-escape.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
-    req.onreadystatechange = function () {
-      loader.style.display = 'none';
-    }
+    req.open("GET", 'https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
+    req.onreadystatechange = () => {loader.style.display = 'none'};
     req.send();
 
-    if (req.status === 200 ){    
+    if (req.status === 200 ){  
       buttonSection.style.display = 'flex';
       totalTime.style.display = 'block';
 
@@ -95,6 +93,7 @@ class App extends React.Component {
         swal('oops..', 'Invalid username', 'error');
         self.init();
       } else if (xmlDoc.getElementsByTagName("item")) {
+        loader.style.display = 'none';
         this.createGameList(xmlDoc);
       }
 
@@ -111,12 +110,14 @@ class App extends React.Component {
 
     if (e.target.className === 'selected') {
       const actualTime = parseInt(this.state.totalTime) - time;
-      this.setState({totalTime: actualTime})
+      this.setState({totalTime: actualTime});
+
       e.target.classList.remove('selected');
       e.target.classList.add('notSelected');
     } else {
       const actualTime = parseInt(this.state.totalTime) + time;
-      this.setState({totalTime: actualTime})
+      this.setState({totalTime: actualTime});
+
       e.target.classList.remove('notSelected');
       e.target.classList.add('selected');
     }
