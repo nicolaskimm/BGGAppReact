@@ -73,9 +73,6 @@ $buttonBack: hsla(225, 50%, 9%, 0.4);
             width: 40px;
             outline: none;
             transition: 0.3s;
-            &:hover {
-                background-color: $pinkyColor;
-            }
         }
 
         .textinfo_button-selected {

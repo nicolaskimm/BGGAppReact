@@ -102,10 +102,6 @@
   transition: 0.3s;
 }
 
-.singleGame .textInfo .textinfo_button-notSelected:hover, .singleGame .textInfo .textinfo_button-selected:hover {
-  background-color: #b92d44;
-}
-
 .singleGame .textInfo .textinfo_button-selected {
   background-color: #b92d44;
 }
