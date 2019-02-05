@@ -92,21 +92,21 @@
   }
 }
 
-.singleGame .textInfo .notSelected, .singleGame .textInfo .selected {
+.singleGame .textInfo .textinfo_button-notSelected, .singleGame .textInfo .textinfo_button-selected {
   background-color: rgba(11, 17, 34, 0.4);
   border: 2px solid #b92d44;
   height: 40px;
   width: 40px;
   outline: none;
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
-.singleGame .textInfo .notSelected:hover, .singleGame .textInfo .selected:hover {
+.singleGame .textInfo .textinfo_button-notSelected:hover, .singleGame .textInfo .textinfo_button-selected:hover {
   background-color: #b92d44;
 }
 
-.singleGame .textInfo .selected {
+.singleGame .textInfo .textinfo_button-selected {
   background-color: #b92d44;
 }
 /*# sourceMappingURL=SingleGame.css.map */

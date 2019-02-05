@@ -108,18 +108,18 @@ class App extends React.Component {
     const parentEl = e.target.parentNode.parentNode;
     const time = parseInt(parentEl.querySelector('.textInfo_time').innerHTML);
 
-    if (e.target.className === 'selected') {
+    if (e.target.className === 'textinfo_button-selected') {
       const actualTime = parseInt(this.state.totalTime) - time;
       this.setState({totalTime: actualTime});
 
-      e.target.classList.remove('selected');
-      e.target.classList.add('notSelected');
+      e.target.classList.remove('textinfo_button-selected');
+      e.target.classList.add('textinfo_button-notSelected');
     } else {
       const actualTime = parseInt(this.state.totalTime) + time;
       this.setState({totalTime: actualTime});
 
-      e.target.classList.remove('notSelected');
-      e.target.classList.add('selected');
+      e.target.classList.remove('textinfo_button-notSelected');
+      e.target.classList.add('textinfo_button-selected');
     }
   }
 

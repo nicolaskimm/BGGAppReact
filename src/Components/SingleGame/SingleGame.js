@@ -12,8 +12,7 @@ const SingleGame = (props) => (
             <p className='textInfo_time'> {props.time} min </p> 
             <p className='textInfo_players'> {props.playersMin} - {props.playersMax} players </p>
             <p className='textInfo_numOfPlays'> {props.numOfPlays} </p> 
-            <div className='textInfo_notSelected'><button className='notSelected' onClick={props.onClick}> </button></div>
-
+            <button className='textinfo_button-notSelected' onClick={props.onClick}></button>
         </div>
     </li>
 );

@@ -66,7 +66,7 @@ $buttonBack: hsla(225, 50%, 9%, 0.4);
             }
         }
 
-        .notSelected {
+        .textinfo_button-notSelected {
             background-color: $buttonBack;
             border: 2px solid $pinkyColor;
             height: 40px;
@@ -78,8 +78,8 @@ $buttonBack: hsla(225, 50%, 9%, 0.4);
             }
         }
 
-        .selected {
-            @extend .notSelected;
+        .textinfo_button-selected {
+            @extend .textinfo_button-notSelected;
             background-color: $pinkyColor;
         }
     }
