@@ -24,7 +24,11 @@ This app was made for two purposes:
 
 ## Demo 
 You can find demo version here:
-https://nicolaskimm.github.io/BGGAppReact/
+https://boardime.herokuapp.com/
+
+## How to
+To check how this app works you can type my own login from my BGG account: nicolaskim. Next pass the time (in minutes!) and number of players. I recommend to type 100 for time, and 3 for number of players. It will show results.
+
 
 ## Features
 List of features ready and TODOs for future development
