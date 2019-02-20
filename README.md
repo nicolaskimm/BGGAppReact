@@ -4,10 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Table of contents
 * [General info](#general-info)
-* [Technologies](#technologies)
 * [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Features](#features)
+* [Technologies](#technologies)
+* [Demo](#demo)
+* [How to](#how-to)
+* [Features](#Features)
 * [Status](#status)
 
 ## General info
