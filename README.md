@@ -17,7 +17,7 @@ This app was made for two purposes:
 2. To help players with the most urgent problem: WHAT CAN I PUT ON MY TABLE AND PLAY. It's using info about your game collection and number of plays from your BoardGameGeek account. 
 
 ## Screenshots
-![ezgif com-gif-maker 1](https://user-images.githubusercontent.com/32582359/48980354-0d2d5400-f0c8-11e8-80d6-6b947f6f4b96.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/32582359/53640735-3ad8ea80-3c2d-11e9-8da4-cf1a01b9049c.gif)
 
 ## Technologies
 * **React** in version: 16.6.0
