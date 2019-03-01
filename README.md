@@ -1,4 +1,4 @@
-# BggApp :game_die:
+# Boardime :game_die:
 BGGApp is a simple search-engine which can help you choose game based on the time you have and amount of players. 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using GitHub Pages.
 
@@ -33,11 +33,12 @@ To check how this app works you can type my own login from my BGG account: nicol
 
 ## Features
 List of features ready and TODOs for future development
+
 Ready:
 * Listing games from your collection based on the time and amount of players
 * Showing how many times you played each of the title
 * Adding play time of checked game to show total time of chosen games.
-* Listin only played or not played games (so you can always choose if you have extra time for learn new rules)
+* Listing only played or not played games (so you can always choose if you have extra time for learn new rules)
 * Randomly choosing one game 
 
 To-do:
