@@ -76,32 +76,38 @@ class App extends React.Component {
     const totalTime = document.querySelector('.totalTime');
     loader.style.display= 'flex';
 
-    const req = new XMLHttpRequest();
-    req.open("GET", 'https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=' + this.state.nick + '&stats=1&subtype=boardgame&own=1', false);
-    req.onreadystatechange = () => {loader.style.display = 'none'};
-    req.send();
-
-    if (req.status === 200 ){  
-      buttonSection.style.display = 'flex';
-      totalTime.style.display = 'block';
-
-      const text = req.responseText;
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(text, "text/xml");
-
-      if (xmlDoc.getElementsByTagName("message")[0]) {
-        swal('oops..', 'Invalid username', 'error');
-        self.init();
-      } else if (xmlDoc.getElementsByTagName("item")) {
-        loader.style.display = 'none';
-        this.createGameList(xmlDoc);
+    const getData = new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+      req.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=' + self.state.nick + '&stats=1&subtype=boardgame&own=1', false);
+      req.onreadystatechange = () => { loader.style.display = 'none' };
+      req.onload = () => {
+        req.status === 200 ? resolve(req.responseText) : reject();
       }
+      req.onerror = () => reject();
+      req.send();
+    });
 
-    } else if (req.status !== 200) {
-      swal('Ooops..', 'Something went wrong, please try again', 'error');
-      buttonSection.style.display = 'none';
-      totalTime.style.display = 'none';
-    }
+    getData
+      .then((data) => {
+        buttonSection.style.display = 'flex';
+        totalTime.style.display = 'block';
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
+
+        if (xmlDoc.getElementsByTagName("message")[0]) {
+          swal('oops..', 'Invalid username', 'error');
+          self.init();
+        } else if (xmlDoc.getElementsByTagName("item")) {
+          loader.style.display = 'none';
+          this.createGameList(xmlDoc);
+        } 
+      })
+
+      .catch(() => {
+        swal('Ooops..', 'Something went wrong, please try again', 'error');
+        self.init();
+      })
   }
     
   checkForSelection(e) {
