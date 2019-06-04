@@ -20,7 +20,8 @@
     "react/button-has-type": 0,
     "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
     "no-unused-expressions": 0,
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "import/no-unresolved": 0
   },
   "settings": {
     "import/resolver": {

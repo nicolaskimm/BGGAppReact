@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
-import styled from 'styled-components';
 import swal from 'sweetalert';
 import GameCollection from 'Components/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
-
-const StyledHeading = styled.h1`
-  color: ${({ theme }) => theme.color.pink};
-`;
+import Search from 'molecules/Search/Search';
 
 class App extends React.Component {
   constructor(props) {
@@ -182,37 +178,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <GlobalStyle />
-        <div className="inputs">
-          <StyledHeading> Who are you? </StyledHeading>
-          <input
-            className="inputs_nick"
-            placeholder="your nickname"
-            value={this.state.nick}
-            onChange={this.handleChange.bind(this)}
-          />
-          <h1> How much time do we have? </h1>
-          <input
-            className="inputs_time"
-            placeholder="only numbers!"
-            value={this.state.time}
-            onChange={this.handleChange.bind(this)}
-          />
-          <h1> How many people?</h1>
-          <input
-            className="inputs_players"
-            placeholder="type the number"
-            value={this.state.players}
-            onChange={this.handleChange.bind(this)}
-          />
-          <div className="inputs_button">
-            <button className="inputs_button_search" onClick={this.handleClick.bind(this)}>
-              go
-            </button>
-            <button className="inputs_button_clear" onClick={this.init.bind(this)}>
-              clear
-            </button>
-          </div>
-        </div>
+        <Search />
         <div className="loader">
           <div className="loader_dot1" />
           <div className="loader_dot2" />
