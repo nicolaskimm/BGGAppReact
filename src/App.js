@@ -1,7 +1,13 @@
 import React from 'react';
 import './App.css';
+import styled from 'styled-components';
 import swal from 'sweetalert';
 import GameCollection from 'Components/GameCollection/GameCollection';
+import GlobalStyle from 'theme/GlobalStyle';
+
+const StyledHeading = styled.h1`
+  color: ${({ theme }) => theme.color.pink};
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -175,8 +181,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
+        <GlobalStyle />
         <div className="inputs">
-          <h1> Who are you? </h1>
+          <StyledHeading> Who are you? </StyledHeading>
           <input
             className="inputs_nick"
             placeholder="your nickname"

@@ -6,7 +6,8 @@
   },
   "env": {
     "browser": true,
-    "jest": true
+    "jest": true,
+    "es6": true
   },
   "rules": {
     "react/destructuring-assignment": 0,
@@ -18,7 +19,8 @@
     ],
     "react/button-has-type": 0,
     "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
-    "no-unused-expressions": 0
+    "no-unused-expressions": 0,
+    "import/prefer-default-export": 0
   },
   "settings": {
     "import/resolver": {
