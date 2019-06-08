@@ -1,13 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import InputHeader from 'atoms/InputHeader/InputHeader';
+import Button from 'atoms/Button/Button';
 
 const StyledWrapper = styled.div`
   width: 100vw;
-  height: 5vw;
+  height: 5vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 20px;
+
+  > * {
+    align-self: flex-end;
+  }
+`;
+
+const StyledButtonWrapper = styled.div`
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+
+  :first-child {
+    margin-right: 5px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -18,7 +35,6 @@ const StyledInput = styled.input`
   background-color: transparent;
   color: ${({ theme }) => theme.color.white};
   text-align: center;
-  align-self: flex-end;
 
   &:placeholder-shown {
     padding-top: 20px;
@@ -49,33 +65,44 @@ const StyledInput = styled.input`
 
 const StyledHeader = styled(InputHeader)`
   margin: 0 30px;
-  align-self: flex-end;
 `;
 
-const Search = () => (
+const Search = props => (
   <StyledWrapper>
     <StyledHeader>Nick</StyledHeader>
     <StyledInput
-      className="inputs_nick"
+      name="nick"
       placeholder="your nickname"
-      // value={this.state.nick}
-      // onChange={this.handleChange.bind(this)}
+      value={props.nick}
+      onChange={props.onChange}
     />
     <StyledHeader>Time</StyledHeader>
     <StyledInput
-      className="inputs_time"
+      name="time"
       placeholder="only numbers!"
-      // value={this.state.time}
-      // onChange={this.handleChange.bind(this)}
+      value={props.time}
+      onChange={props.onChange}
     />
     <StyledHeader>Number of players</StyledHeader>
     <StyledInput
-      className="inputs_players"
+      name="players"
       placeholder="type the number"
-      // value={this.state.players}
-      // onChange={this.handleChange.bind(this)}
+      value={props.players}
+      onChange={props.onChange}
     />
+    <StyledButtonWrapper>
+      <Button onClick={props.onClick}>go</Button>
+      <Button>x</Button>
+    </StyledButtonWrapper>
   </StyledWrapper>
 );
+
+Search.propTypes = {
+  nick: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  players: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Search;

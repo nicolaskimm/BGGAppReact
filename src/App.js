@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import swal from 'sweetalert';
-import GameCollection from 'Components/GameCollection/GameCollection';
+import GridTemplate from 'theme/GridTemplate';
 import GlobalStyle from 'theme/GlobalStyle';
 import Search from 'molecules/Search/Search';
 
@@ -11,12 +11,13 @@ class App extends React.Component {
     this.state = {
       itemsFit: [],
       itemsFitMutable: [],
-      nick: '',
-      players: '',
-      time: '',
+      nick: 'nicolaskim',
+      players: '3',
+      time: '100',
       totalTime: 0,
     };
     this.checkForSelection = this.checkForSelection.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   init() {
@@ -36,19 +37,10 @@ class App extends React.Component {
     totalTime.style.display = 'none';
   }
 
-  handleChange(event) {
-    switch (event.target.className) {
-      case 'inputs_nick':
-        this.setState({ nick: event.target.value });
-        break;
-      case 'inputs_time':
-        this.setState({ time: event.target.value });
-        break;
-      case 'inputs_players':
-        this.setState({ players: event.target.value });
-        break;
-      default:
-    }
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
   createGameList(xmlDoc) {
@@ -178,7 +170,13 @@ class App extends React.Component {
     return (
       <div className="app">
         <GlobalStyle />
-        <Search />
+        <Search
+          nick={this.state.nick}
+          time={this.state.time}
+          players={this.state.players}
+          onChange={this.handleChange}
+          onClick={this.handleClick.bind(this)}
+        />
         <div className="loader">
           <div className="loader_dot1" />
           <div className="loader_dot2" />
@@ -211,12 +209,7 @@ class App extends React.Component {
           Total time: <span>{this.state.totalTime}</span>{' '}
         </h1>
         <div className="results">
-          <ul className="gameCollection">
-            <GameCollection
-              itemsFit={this.state.itemsFitMutable}
-              onClick={this.checkForSelection}
-            />
-          </ul>
+          <GridTemplate itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
         </div>
       </div>
     );

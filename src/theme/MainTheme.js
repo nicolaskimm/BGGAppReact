@@ -3,6 +3,7 @@ export const theme = {
     white: 'hsl(0, 17%, 88%)',
     lilac: 'hsla(240, 36%, 65%, 0.718)',
     navyBlue: 'hsla(225, 50%, 9%, 0.877)',
+    lighterBlue: 'hsla(225, 50%, 9%, 0.89)',
     pink: 'hsl(350, 61%, 45%)',
   },
   width: {
