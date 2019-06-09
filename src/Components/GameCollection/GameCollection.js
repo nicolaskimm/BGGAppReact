@@ -5,10 +5,9 @@ import GridTemplate from 'theme/GridTemplate';
 
 const GameCollection = props => (
   <GridTemplate>
-    {props.itemsFit.map((item, index) => (
+    {props.itemsFit.map(item => (
       <SingleGame
         key={item.id}
-        index={index}
         src={item.getElementsByTagName('image')[0].innerHTML}
         title={item.getElementsByTagName('name')[0].innerHTML}
         time={item.getElementsByTagName('stats')[0].getAttribute('playingtime')}

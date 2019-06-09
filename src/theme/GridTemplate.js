@@ -6,7 +6,11 @@ const StyledWrapper = styled.div`
   width: 100vw;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-gap: 10px;
+  grid-gap: 50px 10px;
+
+  > * {
+    justify-self: center;
+  }
 `;
 
 const GridTemplate = ({ children }) => <StyledWrapper>{children}</StyledWrapper>;

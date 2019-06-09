@@ -5,7 +5,7 @@ const Button = styled.button`
   width: 40px;
   height: 30px;
   font-size: 12px;
-  background-color: transparent;
+  background-color: ${({ isClicked }) => (isClicked ? 'red' : 'transparent')};
   border: 1px solid;
   border-color: ${({ theme }) => theme.color.pink};
   color: ${({ theme }) => theme.color.white};

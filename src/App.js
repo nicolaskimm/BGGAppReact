@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import swal from 'sweetalert';
-import GridTemplate from 'theme/GridTemplate';
+import GameCollection from 'Components/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
 import Search from 'molecules/Search/Search';
 
@@ -112,24 +112,15 @@ class App extends React.Component {
     }
   }
 
-  checkForSelection(e) {
-    const parentEl = e.target.parentNode.parentNode;
-    const time = parseInt(parentEl.querySelector('.textInfo_time').innerHTML, 10);
+  checkForSelection(isClicked, time) {
+    const currentTime = parseInt(time, 10);
     const prevTime = this.state.totalTime;
 
-    if (e.target.className === 'textinfo_button-selected') {
-      const actualTime = parseInt(prevTime, 10) - time;
-      this.setState({ totalTime: actualTime });
+    const sumOfTimes = isClicked ? prevTime + currentTime : prevTime - currentTime;
 
-      e.target.classList.remove('textinfo_button-selected');
-      e.target.classList.add('textinfo_button-notSelected');
-    } else {
-      const actualTime = parseInt(prevTime, 10) + time;
-      this.setState({ totalTime: actualTime });
-
-      e.target.classList.remove('textinfo_button-notSelected');
-      e.target.classList.add('textinfo_button-selected');
-    }
+    this.setState({
+      totalTime: parseInt(sumOfTimes, 10),
+    });
   }
 
   checkForNumOfPlays(e) {
@@ -209,7 +200,7 @@ class App extends React.Component {
           Total time: <span>{this.state.totalTime}</span>{' '}
         </h1>
         <div className="results">
-          <GridTemplate itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
+          <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
         </div>
       </div>
     );
