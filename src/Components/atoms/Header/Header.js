@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-const InputHeader = styled.h1`
+const Header = styled.h1`
   font-size: 30px;
-
-  color: ${({ theme }) => theme.color.white};
+  color: black;
 
   @media screen and (max-width: xxl) {
     font-size: 18px;
@@ -26,4 +25,4 @@ const InputHeader = styled.h1`
   }
 `;
 
-export default InputHeader;
+export default Header;

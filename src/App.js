@@ -1,9 +1,10 @@
 import React from 'react';
-import './App.css';
 import swal from 'sweetalert';
-import GameCollection from 'Components/GameCollection/GameCollection';
+import axios from 'axios';
+import GameCollection from 'views/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
-import Search from 'molecules/Search/Search';
+import Search from 'Components/molecules/Search/Search';
+import ButtonsSection from 'Components/molecules/ButtonsSection/ButtonsSection';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
       players: '3',
       time: '100',
       totalTime: 0,
+      buttonsVisibility: false,
     };
     this.checkForSelection = this.checkForSelection.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,13 +30,8 @@ class App extends React.Component {
       totalTime: 0,
       itemsFitMutable: [],
       itemsFit: [],
+      buttonsVisibility: false,
     });
-    const buttonSection = document.querySelector('.buttonSection');
-    const totalTime = document.querySelector('.totalTime');
-    const loader = document.querySelector('.loader');
-    buttonSection.style.display = 'none';
-    loader.style.display = 'none';
-    totalTime.style.display = 'none';
   }
 
   handleChange(e) {
@@ -44,72 +41,61 @@ class App extends React.Component {
   }
 
   createGameList(xmlDoc) {
-    const items = xmlDoc.getElementsByTagName('item');
-    const itemsArray = Array.from(items);
-    const Arrrr = [];
+    const itemsArray = Array.from(xmlDoc.getElementsByTagName('item'));
+    const filteredArray = [];
+    const timeInput = parseInt(this.state.time, 10);
+    const playersInput = parseInt(this.state.players, 10);
 
     for (let x = 0; x <= itemsArray.length - 1; x++) {
-      const timeInput = parseInt(this.state.time, 10);
-      const playersInput = parseInt(this.state.players, 10);
-      const playTime = itemsArray[x].getElementsByTagName('stats')[0].getAttribute('playingtime');
-      const playersMinAmount = itemsArray[x]
-        .getElementsByTagName('stats')[0]
-        .getAttribute('minplayers');
-      const playersMaxAmount = itemsArray[x]
-        .getElementsByTagName('stats')[0]
-        .getAttribute('maxplayers');
+      const itemStats = itemsArray[x].getElementsByTagName('stats')[0];
+      const playTime = parseInt(itemStats.getAttribute('playingtime'), 10);
+      const playersMinAmount = parseInt(itemStats.getAttribute('minplayers'), 10);
+      const playersMaxAmount = parseInt(itemStats.getAttribute('maxplayers'), 10);
 
       if (
-        timeInput >= parseInt(playTime, 10) &&
+        timeInput >= playTime &&
         playersInput >= playersMinAmount &&
         playersInput <= playersMaxAmount
       ) {
-        Arrrr.push(itemsArray[x]);
+        filteredArray.push(itemsArray[x]);
       }
     }
-    this.setState({ itemsFitMutable: Arrrr, itemsFit: Arrrr });
+    this.setState({
+      itemsFitMutable: filteredArray,
+      itemsFit: filteredArray,
+      buttonsVisibility: true,
+    });
   }
 
   handleClick() {
     const self = this;
-    const loader = document.querySelector('.loader');
-    const buttonSection = document.querySelector('.buttonSection');
-    const totalTime = document.querySelector('.totalTime');
-    loader.style.display = 'flex';
 
-    const req = new XMLHttpRequest();
-    req.open(
-      'GET',
-      `https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=${
-        this.state.nick
-      }&stats=1&subtype=boardgame&own=1`,
-      false,
-    );
-    req.onreadystatechange = () => {
-      loader.style.display = 'none';
-    };
-    req.send();
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=${
+          self.state.nick
+        }&stats=1&subtype=boardgame&own=1`,
+      )
 
-    if (req.status === 200) {
-      buttonSection.style.display = 'flex';
-      totalTime.style.display = 'block';
+      .then(res => {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(res.data, 'text/xml');
+        return xmlDoc;
+      })
 
-      const text = req.responseText;
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(text, 'text/xml');
+      .then(xmlDoc => {
+        if (xmlDoc.getElementsByTagName('message')[0]) {
+          swal('oops..', 'Invalid username', 'error');
+          self.init();
+        } else if (xmlDoc.getElementsByTagName('item')) {
+          this.createGameList(xmlDoc);
+        }
+      })
 
-      if (xmlDoc.getElementsByTagName('message')[0]) {
-        swal('oops..', 'Invalid username', 'error');
+      .catch(res => {
+        if (res.status !== 200) swal('Ooops..', 'Something went wrong, please try again', 'error');
         self.init();
-      } else if (xmlDoc.getElementsByTagName('item')) {
-        loader.style.display = 'none';
-        this.createGameList(xmlDoc);
-      }
-    } else if (req.status !== 200) {
-      swal('Ooops..', 'Something went wrong, please try again', 'error');
-      buttonSection.style.display = 'none';
-      totalTime.style.display = 'none';
-    }
+      });
   }
 
   checkForSelection(isClicked, time) {
@@ -138,23 +124,24 @@ class App extends React.Component {
       }
     }
 
-    e.target.className === 'buttonSection_played'
+    e.target.name === 'played'
       ? this.setState({ itemsFitMutable: itemsPlayed })
       : this.setState({ itemsFitMutable: itemsNotPlayed });
   }
 
   randomGame() {
-    const buttonSelected = document.querySelector('.textinfo_button-notSelected');
-    buttonSelected.style.display = 'none';
     const itemsLength = this.state.itemsFit.length;
     const result = Math.floor(Math.random() * itemsLength);
     const item = [];
     item.push(this.state.itemsFit[result]);
 
     this.setState({ itemsFitMutable: item });
+  }
 
-    const totalTime = document.querySelector('.totalTime');
-    totalTime.style.display = 'none';
+  allGames() {
+    this.setState(prevState => ({
+      itemsFitMutable: prevState.itemsFit,
+    }));
   }
 
   render() {
@@ -167,41 +154,21 @@ class App extends React.Component {
           players={this.state.players}
           onChange={this.handleChange}
           onClick={this.handleClick.bind(this)}
+          init={this.init.bind(this)}
         />
         <div className="loader">
           <div className="loader_dot1" />
           <div className="loader_dot2" />
           <div className="loader_dot3" />
         </div>
-        <div className="buttonSection">
-          <h1>
-            Something new
-            <button
-              className="buttonSection_notPlayed"
-              onClick={this.checkForNumOfPlays.bind(this)}
-            >
-              click
-            </button>
-          </h1>
-          <h1>
-            Something what I know
-            <button className="buttonSection_played" onClick={this.checkForNumOfPlays.bind(this)}>
-              click
-            </button>
-          </h1>
-          <h1>
-            Something random{' '}
-            <button className="buttonSection_random" onClick={this.randomGame.bind(this)}>
-              click
-            </button>
-          </h1>
-        </div>
-        <h1 className="totalTime">
-          Total time: <span>{this.state.totalTime}</span>{' '}
-        </h1>
-        <div className="results">
-          <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
-        </div>
+        <ButtonsSection
+          checkForNumOfPlays={this.checkForNumOfPlays.bind(this)}
+          randomGame={this.randomGame.bind(this)}
+          buttonsVisibility={this.state.buttonsVisibility}
+          allGames={this.allGames.bind(this)}
+          totalTime={this.state.totalTime}
+        />
+        <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
       </div>
     );
   }

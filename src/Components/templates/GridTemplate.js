@@ -4,9 +4,11 @@ import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   width: 100vw;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 50px 10px;
+  margin-bottom: 30px;
 
   > * {
     justify-self: center;
@@ -16,7 +18,7 @@ const StyledWrapper = styled.div`
 const GridTemplate = ({ children }) => <StyledWrapper>{children}</StyledWrapper>;
 
 GridTemplate.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
 };
 
 export default GridTemplate;

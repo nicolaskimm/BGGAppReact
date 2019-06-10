@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SingleGame from 'Components/SingleGame/SingleGame';
-import GridTemplate from 'theme/GridTemplate';
+import SingleGame from 'views/SingleGame/SingleGame';
+import GridTemplate from 'Components/templates/GridTemplate';
 
 const GameCollection = props => (
   <GridTemplate>
-    {props.itemsFit.map(item => (
+    {props.itemsFit.map((item, index) => (
       <SingleGame
-        key={item.id}
+        key={index}
         src={item.getElementsByTagName('image')[0].innerHTML}
         title={item.getElementsByTagName('name')[0].innerHTML}
         time={item.getElementsByTagName('stats')[0].getAttribute('playingtime')}
@@ -21,12 +21,11 @@ const GameCollection = props => (
         onClick={props.onClick}
       />
     ))}
-    )
   </GridTemplate>
 );
 
 GameCollection.propTypes = {
-  itemsFit: PropTypes.arrayOf(PropTypes.nodes).isRequired,
+  itemsFit: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

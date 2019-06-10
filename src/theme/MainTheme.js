@@ -5,6 +5,7 @@ export const theme = {
     navyBlue: 'hsla(225, 50%, 9%, 0.877)',
     lighterBlue: 'hsla(225, 50%, 9%, 0.89)',
     pink: 'hsl(350, 61%, 45%)',
+    main: '#0e6670',
   },
   width: {
     xxl: '1586px',

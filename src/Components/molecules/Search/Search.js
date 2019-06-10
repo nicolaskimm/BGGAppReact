@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import InputHeader from 'atoms/InputHeader/InputHeader';
-import Button from 'atoms/Button/Button';
+import Header from 'Components/atoms/Header/Header';
+import Button from 'Components/atoms/Button/Button';
+import Input from 'Components/atoms/Input/Input';
 
 const StyledWrapper = styled.div`
   width: 100vw;
@@ -27,64 +28,18 @@ const StyledButtonWrapper = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
-  width: 140px;
-  height: 80%;
-  border: none;
-  border-bottom: 1.3px solid red;
-  background-color: transparent;
-  color: ${({ theme }) => theme.color.white};
-  text-align: center;
-
-  &:placeholder-shown {
-    padding-top: 20px;
-    outline: none;
-  }
-
-  &:hover {
-    @media screen and (max-width: 1101px) {
-      width: 120px;
-      font-size: 12px;
-    }
-
-    @media screen and (max-width: 899px) {
-      width: 100px;
-      font-size: 12px;
-    }
-
-    @media screen and (max-width: 699px) {
-      width: 80px;
-      font-size: 10px;
-    }
-
-    @media screen and (max-width: 599px) {
-      margin-bottom: 40px;
-    }
-  }
-`;
-
-const StyledHeader = styled(InputHeader)`
+const StyledHeader = styled(Header)`
   margin: 0 30px;
 `;
 
 const Search = props => (
   <StyledWrapper>
     <StyledHeader>Nick</StyledHeader>
-    <StyledInput
-      name="nick"
-      placeholder="your nickname"
-      value={props.nick}
-      onChange={props.onChange}
-    />
+    <Input name="nick" placeholder="your nickname" value={props.nick} onChange={props.onChange} />
     <StyledHeader>Time</StyledHeader>
-    <StyledInput
-      name="time"
-      placeholder="only numbers!"
-      value={props.time}
-      onChange={props.onChange}
-    />
+    <Input name="time" placeholder="only numbers!" value={props.time} onChange={props.onChange} />
     <StyledHeader>Number of players</StyledHeader>
-    <StyledInput
+    <Input
       name="players"
       placeholder="type the number"
       value={props.players}
@@ -92,7 +47,7 @@ const Search = props => (
     />
     <StyledButtonWrapper>
       <Button onClick={props.onClick}>go</Button>
-      <Button>x</Button>
+      <Button onClick={props.init}>x</Button>
     </StyledButtonWrapper>
   </StyledWrapper>
 );
@@ -103,6 +58,7 @@ Search.propTypes = {
   players: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  init: PropTypes.func.isRequired,
 };
 
 export default Search;
