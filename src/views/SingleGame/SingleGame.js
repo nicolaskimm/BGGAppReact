@@ -13,8 +13,10 @@ const StyledWrapper = styled.div`
   width: 350px;
   height: 400px;
   background-color: #fcfcfc;
-  box-shadow: 0px 12px 16px 2px rgb(0, 0, 0, 0.3);
+  box-shadow: ${({ isClicked }) => (isClicked ? '0px 12px 16px 2px rgb(0, 0, 0, 0.3)' : 'none')};
   position: relative;
+  border: ${({ isClicked }) => (isClicked ? '4px solid green' : '1px solid #d1cecd')};
+  transition: 0.45s;
 `;
 
 const StyledInnerWrapper = styled.div`
@@ -62,9 +64,9 @@ class SingleGame extends Component {
     const { isClicked } = this.state;
 
     return (
-      <StyledWrapper>
+      <StyledWrapper isClicked={isClicked}>
         <Image image={src} />
-        <StyledButton pick isClicked={isClicked} onClick={() => this.toggleClick(time)} />
+        <StyledButton isClicked={isClicked} onClick={() => this.toggleClick(time)} />
         <StyledInnerWrapper>
           <Paragraph> {title} </Paragraph>
           <Paragraph time> {time} min </Paragraph>

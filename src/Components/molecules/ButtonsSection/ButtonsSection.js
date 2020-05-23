@@ -34,11 +34,20 @@ const ButtonsSection = props => (
   <StyledWrapper isVisible={props.buttonsVisibility}>
     <StyledInnerWrapper>
       <StyledHeader>Choose one: </StyledHeader>
-      <StyledButton name="played" buttonSection onClick={props.checkForNumOfPlays}>
+      <StyledButton name="played" buttonSection onClick={props.checkIfPlayed}>
         already played
       </StyledButton>
-      <StyledButton name="notPlayed" buttonSection onClick={props.checkForNumOfPlays}>
+      <StyledButton name="notPlayed" buttonSection onClick={props.checkIfPlayed}>
         not played
+      </StyledButton>
+      <StyledButton name="max3" buttonSection onClick={props.checkIfPlayed}>
+        max 3
+      </StyledButton>
+      <StyledButton name="4to10" buttonSection onClick={props.checkIfPlayed}>
+        4 to 10
+      </StyledButton>
+      <StyledButton name="moreThan10" buttonSection onClick={props.checkIfPlayed}>
+        more than 10
       </StyledButton>
       <StyledButton buttonSection onClick={props.randomGame}>
         random
@@ -56,7 +65,7 @@ const ButtonsSection = props => (
 ButtonsSection.propTypes = {
   randomGame: PropTypes.func.isRequired,
   buttonsVisibility: PropTypes.bool.isRequired,
-  checkForNumOfPlays: PropTypes.func.isRequired,
+  checkIfPlayed: PropTypes.func.isRequired,
   allGames: PropTypes.func.isRequired,
   totalTime: PropTypes.number.isRequired,
 };

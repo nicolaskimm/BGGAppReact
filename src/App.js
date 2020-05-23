@@ -72,9 +72,7 @@ class App extends React.Component {
 
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=${
-          self.state.nick
-        }&stats=1&subtype=boardgame&own=1`,
+        `https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2/collection?username=${self.state.nick}&stats=1&subtype=boardgame&own=1`,
       )
 
       .then(res => {
@@ -109,24 +107,67 @@ class App extends React.Component {
     });
   }
 
-  checkForNumOfPlays(e) {
+  checkIfPlayed(e) {
     const items = this.state.itemsFit;
-    const itemsNotPlayed = [];
-    const itemsPlayed = [];
+    const type = e.target.name;
+    const notPlayed = [];
+    const played = [];
+    const maxThree = [];
+    const fourToTen = [];
+    const moreThantTen = [];
 
     for (let x = 0; x <= items.length - 1; x++) {
-      const playedGames = parseInt(items[x].getElementsByTagName('numplays')[0].innerHTML, 10);
+      const numOfPlays = parseInt(items[x].getElementsByTagName('numplays')[0].innerHTML, 10);
 
-      if (playedGames === 0) {
-        itemsNotPlayed.push(items[x]);
-      } else {
-        itemsPlayed.push(items[x]);
+      switch (true) {
+        case numOfPlays <= 3 && numOfPlays > 0:
+          maxThree.push(items[x]);
+          played.push(items[x]);
+          break;
+
+        case numOfPlays >= 4 && numOfPlays <= 10:
+          fourToTen.push(items[x]);
+          played.push(items[x]);
+          break;
+
+        case numOfPlays > 10:
+          moreThantTen.push(items[x]);
+          played.push(items[x]);
+          break;
+
+        case numOfPlays === 0:
+          notPlayed.push(items[x]);
+          break;
+
+        default:
+          break;
       }
     }
 
-    e.target.name === 'played'
-      ? this.setState({ itemsFitMutable: itemsPlayed })
-      : this.setState({ itemsFitMutable: itemsNotPlayed });
+    switch (type) {
+      case 'played':
+        this.setState({ itemsFitMutable: played });
+        break;
+
+      case 'notPlayed':
+        this.setState({ itemsFitMutable: notPlayed });
+        break;
+
+      case 'max3':
+        this.setState({ itemsFitMutable: maxThree });
+        break;
+
+      case '4to10':
+        this.setState({ itemsFitMutable: fourToTen });
+        break;
+
+      case 'moreThan10':
+        this.setState({ itemsFitMutable: moreThantTen });
+        break;
+
+      default:
+        break;
+    }
   }
 
   randomGame() {
@@ -162,12 +203,13 @@ class App extends React.Component {
           <div className="loader_dot3" />
         </div>
         <ButtonsSection
-          checkForNumOfPlays={this.checkForNumOfPlays.bind(this)}
+          checkIfPlayed={this.checkIfPlayed.bind(this)}
           randomGame={this.randomGame.bind(this)}
           buttonsVisibility={this.state.buttonsVisibility}
           allGames={this.allGames.bind(this)}
           totalTime={this.state.totalTime}
         />
+
         <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
       </div>
     );
@@ -175,3 +217,11 @@ class App extends React.Component {
 }
 
 export default App;
+
+/*
+<ButtonWrapper>
+          <StyledButton onClick={() => this.checkForNumOfPlays(3, 0)}>max 3</StyledButton>
+          <StyledButton onClick={() => this.checkForNumOfPlays(3, 10)}>3 to 10</StyledButton>
+          <StyledButton onClick={() => this.checkForNumOfPlays(10, 0)}>10 and more</StyledButton>
+        </ButtonWrapper>
+        */
