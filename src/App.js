@@ -185,6 +185,56 @@ class App extends React.Component {
     }));
   }
 
+  sort(e) {
+    const { name } = e.target;
+    const items = [...this.state.itemsFit];
+    console.log(items[0].name);
+
+    switch (name) {
+      case 'atoz':
+        this.setState({
+          itemsFitMutable: items.sort(),
+        });
+
+        break;
+
+      case 'ztoa':
+        this.setState({
+          itemsFitMutable: items.sort().reverse(),
+        });
+        break;
+
+      case 'mosttoless':
+        items.sort((a, b) => {
+          return (
+            parseInt(b.getElementsByTagName('numplays')[0].innerHTML, 10) -
+            parseInt(a.getElementsByTagName('numplays')[0].innerHTML, 10)
+          );
+        });
+
+        this.setState({
+          itemsFitMutable: items,
+        });
+        break;
+
+      case 'lesstomost':
+        items.sort((a, b) => {
+          return (
+            parseInt(a.getElementsByTagName('numplays')[0].innerHTML, 10) -
+            parseInt(b.getElementsByTagName('numplays')[0].innerHTML, 10)
+          );
+        });
+
+        this.setState({
+          itemsFitMutable: items,
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -197,11 +247,6 @@ class App extends React.Component {
           onClick={this.handleClick.bind(this)}
           init={this.init.bind(this)}
         />
-        <div className="loader">
-          <div className="loader_dot1" />
-          <div className="loader_dot2" />
-          <div className="loader_dot3" />
-        </div>
         <ButtonsSection
           checkIfPlayed={this.checkIfPlayed.bind(this)}
           randomGame={this.randomGame.bind(this)}
@@ -209,7 +254,18 @@ class App extends React.Component {
           allGames={this.allGames.bind(this)}
           totalTime={this.state.totalTime}
         />
-
+        <button onClick={this.sort.bind(this)} name="atoz">
+          sortuj od a do z
+        </button>
+        <button onClick={this.sort.bind(this)} name="ztoa">
+          sortuj od z do a
+        </button>
+        <button onClick={this.sort.bind(this)} name="mosttoless">
+          najczęściej grane
+        </button>
+        <button onClick={this.sort.bind(this)} name="lesstomost">
+          najrzadziej
+        </button>
         <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
       </div>
     );
@@ -217,11 +273,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-/*
-<ButtonWrapper>
-          <StyledButton onClick={() => this.checkForNumOfPlays(3, 0)}>max 3</StyledButton>
-          <StyledButton onClick={() => this.checkForNumOfPlays(3, 10)}>3 to 10</StyledButton>
-          <StyledButton onClick={() => this.checkForNumOfPlays(10, 0)}>10 and more</StyledButton>
-        </ButtonWrapper>
-        */
