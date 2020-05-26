@@ -1,6 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
+import parser from 'xml-js';
 import GameCollection from 'views/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
 import Search from 'Components/molecules/Search/Search';
@@ -40,26 +41,26 @@ class App extends React.Component {
     });
   }
 
-  createGameList(xmlDoc) {
-    const itemsArray = Array.from(xmlDoc.getElementsByTagName('item'));
+  createGameList(items) {
     const filteredArray = [];
     const timeInput = parseInt(this.state.time, 10);
     const playersInput = parseInt(this.state.players, 10);
 
-    for (let x = 0; x <= itemsArray.length - 1; x++) {
-      const itemStats = itemsArray[x].getElementsByTagName('stats')[0];
-      const playTime = parseInt(itemStats.getAttribute('playingtime'), 10);
-      const playersMinAmount = parseInt(itemStats.getAttribute('minplayers'), 10);
-      const playersMaxAmount = parseInt(itemStats.getAttribute('maxplayers'), 10);
+    for (let x = 0; x <= items.length - 1; x++) {
+      const itemStats = items[x].stats._attributes;
+      const playTime = parseInt(itemStats.playingtime, 10);
+      const playersMinAmount = parseInt(itemStats.minplayers, 10);
+      const playersMaxAmount = parseInt(itemStats.maxplayers, 10);
 
       if (
         timeInput >= playTime &&
         playersInput >= playersMinAmount &&
         playersInput <= playersMaxAmount
       ) {
-        filteredArray.push(itemsArray[x]);
+        filteredArray.push(items[x]);
       }
     }
+
     this.setState({
       itemsFitMutable: filteredArray,
       itemsFit: filteredArray,
@@ -76,17 +77,16 @@ class App extends React.Component {
       )
 
       .then(res => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(res.data, 'text/xml');
-        return xmlDoc;
+        const data = parser.xml2js(res.data, { compact: true, spaces: 2 });
+        return data.items.item;
       })
 
-      .then(xmlDoc => {
-        if (xmlDoc.getElementsByTagName('message')[0]) {
+      .then(data => {
+        if (data.errors) {
           swal('oops..', 'Invalid username', 'error');
           self.init();
-        } else if (xmlDoc.getElementsByTagName('item')) {
-          this.createGameList(xmlDoc);
+        } else {
+          this.createGameList(data);
         }
       })
 
@@ -117,7 +117,7 @@ class App extends React.Component {
     const moreThantTen = [];
 
     for (let x = 0; x <= items.length - 1; x++) {
-      const numOfPlays = parseInt(items[x].getElementsByTagName('numplays')[0].innerHTML, 10);
+      const numOfPlays = parseInt(items[x].numplays._text, 10);
 
       switch (true) {
         case numOfPlays <= 3 && numOfPlays > 0:
@@ -187,29 +187,44 @@ class App extends React.Component {
 
   sort(e) {
     const { name } = e.target;
-    const items = [...this.state.itemsFit];
-    console.log(items[0].name);
+    const items = [...this.state.itemsFitMutable];
 
     switch (name) {
       case 'atoz':
+        items.sort((a, b) => {
+          let comparison = 0;
+          if (a.name._text.toUpperCase() > b.name._text.toUpperCase()) {
+            comparison = 1;
+          } else comparison = -1;
+
+          return comparison;
+        });
+
         this.setState({
-          itemsFitMutable: items.sort(),
+          itemsFitMutable: items,
         });
 
         break;
 
       case 'ztoa':
-        this.setState({
-          itemsFitMutable: items.sort().reverse(),
+        items.sort((a, b) => {
+          let comparison = 0;
+          if (b.name._text.toUpperCase() > a.name._text.toUpperCase()) {
+            comparison = 1;
+          } else comparison = -1;
+
+          return comparison;
         });
+
+        this.setState({
+          itemsFitMutable: items,
+        });
+
         break;
 
       case 'mosttoless':
         items.sort((a, b) => {
-          return (
-            parseInt(b.getElementsByTagName('numplays')[0].innerHTML, 10) -
-            parseInt(a.getElementsByTagName('numplays')[0].innerHTML, 10)
-          );
+          return parseInt(b.numplays._text, 10) - parseInt(a.numplays._text, 10);
         });
 
         this.setState({
@@ -219,10 +234,7 @@ class App extends React.Component {
 
       case 'lesstomost':
         items.sort((a, b) => {
-          return (
-            parseInt(a.getElementsByTagName('numplays')[0].innerHTML, 10) -
-            parseInt(b.getElementsByTagName('numplays')[0].innerHTML, 10)
-          );
+          return parseInt(a.numplays._text, 10) - parseInt(b.numplays._text, 10);
         });
 
         this.setState({
