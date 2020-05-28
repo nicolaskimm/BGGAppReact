@@ -222,7 +222,7 @@ class App extends React.Component {
 
         break;
 
-      case 'mosttoless':
+      case 'decending':
         items.sort((a, b) => {
           return parseInt(b.numplays._text, 10) - parseInt(a.numplays._text, 10);
         });
@@ -232,7 +232,7 @@ class App extends React.Component {
         });
         break;
 
-      case 'lesstomost':
+      case 'ascending':
         items.sort((a, b) => {
           return parseInt(a.numplays._text, 10) - parseInt(b.numplays._text, 10);
         });
@@ -265,19 +265,8 @@ class App extends React.Component {
           buttonsVisibility={this.state.buttonsVisibility}
           allGames={this.allGames.bind(this)}
           totalTime={this.state.totalTime}
+          sort={this.sort.bind(this)}
         />
-        <button onClick={this.sort.bind(this)} name="atoz">
-          sortuj od a do z
-        </button>
-        <button onClick={this.sort.bind(this)} name="ztoa">
-          sortuj od z do a
-        </button>
-        <button onClick={this.sort.bind(this)} name="mosttoless">
-          najczęściej grane
-        </button>
-        <button onClick={this.sort.bind(this)} name="lesstomost">
-          najrzadziej
-        </button>
         <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
       </div>
     );
