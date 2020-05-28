@@ -6,12 +6,11 @@ import Button from 'Components/atoms/Button/Button';
 import Input from 'Components/atoms/Input/Input';
 
 const StyledWrapper = styled.div`
-  width: 100vw;
-  height: 5vh;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20px;
+  padding: 30px 0;
 
   > * {
     align-self: flex-end;
@@ -19,9 +18,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledButtonWrapper = styled.div`
-  margin-left: 10px;
-  display: flex;
-  flex-direction: row;
+  padding-left: 10px;
 
   :first-child {
     margin-right: 5px;

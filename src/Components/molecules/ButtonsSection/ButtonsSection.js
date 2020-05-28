@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
-  margin: 60px 0 100px;
 `;
 
 const InnerWrapper = styled.div`
@@ -30,15 +29,8 @@ const StyledSpan = styled.span`
   color: ${({ theme }) => theme.color.main};
 `;
 
-const ButtonsSection = ({
-  buttonsVisibility,
-  checkIfPlayed,
-  randomGame,
-  allGames,
-  totalTime,
-  sort,
-}) => (
-  <Wrapper isVisible={buttonsVisibility}>
+const ButtonsSection = ({ isVisible, checkIfPlayed, randomGame, allGames, totalTime, sort }) => (
+  <Wrapper isVisible={isVisible}>
     <InnerWrapper>
       <StyledHeader>Choose one: </StyledHeader>
       <StyledButton name="played" buttonSection onClick={checkIfPlayed}>
@@ -87,7 +79,7 @@ const ButtonsSection = ({
 
 ButtonsSection.propTypes = {
   randomGame: PropTypes.func.isRequired,
-  buttonsVisibility: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool.isRequired,
   checkIfPlayed: PropTypes.func.isRequired,
   allGames: PropTypes.func.isRequired,
   totalTime: PropTypes.number.isRequired,

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  display: block;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
   width: ${({ buttonSection }) => (buttonSection ? '100px' : '40px')};
   height: 30px;
   font-size: 12px;

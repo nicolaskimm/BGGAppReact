@@ -6,18 +6,46 @@ import GameCollection from 'views/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
 import Search from 'Components/molecules/Search/Search';
 import ButtonsSection from 'Components/molecules/ButtonsSection/ButtonsSection';
+import AppTemplate from 'Components/templates/AppTemplate';
+import Sidebar from 'Components/organisms/Sidebar/Sidebar';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  width: 100%;
+  padding-left: 10px;
+`;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       itemsFit: [],
-      itemsFitMutable: [],
+      itemsFitMutable: [
+        {
+          name: {
+            _text: 'Chojrak',
+          },
+          image: {
+            _text:
+              'https://vignette.wikia.nocookie.net/chojrak/images/0/0f/Wiki_background.jpg/revision/latest?cb=20130315215827&path-prefix=pl',
+          },
+          numplays: {
+            _text: 4,
+          },
+          stats: {
+            _attributes: {
+              playingtime: '120',
+              minplayers: '2',
+              maxplayers: '4',
+            },
+          },
+        },
+      ],
       nick: 'nicolaskim',
       players: '3',
       time: '100',
       totalTime: 0,
-      buttonsVisibility: false,
+      isVisible: true,
     };
     this.checkForSelection = this.checkForSelection.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,7 +59,7 @@ class App extends React.Component {
       totalTime: 0,
       itemsFitMutable: [],
       itemsFit: [],
-      buttonsVisibility: false,
+      isVisible: true,
     });
   }
 
@@ -64,7 +92,7 @@ class App extends React.Component {
     this.setState({
       itemsFitMutable: filteredArray,
       itemsFit: filteredArray,
-      buttonsVisibility: true,
+      isVisible: true,
     });
   }
 
@@ -96,7 +124,8 @@ class App extends React.Component {
       });
   }
 
-  checkForSelection(isClicked, time) {
+  checkForSelection(isClicked, time, e) {
+    console.log(e);
     const currentTime = parseInt(time, 10);
     const prevTime = this.state.totalTime;
 
@@ -249,26 +278,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <AppTemplate>
         <GlobalStyle />
-        <Search
-          nick={this.state.nick}
-          time={this.state.time}
-          players={this.state.players}
-          onChange={this.handleChange}
-          onClick={this.handleClick.bind(this)}
-          init={this.init.bind(this)}
-        />
-        <ButtonsSection
-          checkIfPlayed={this.checkIfPlayed.bind(this)}
-          randomGame={this.randomGame.bind(this)}
-          buttonsVisibility={this.state.buttonsVisibility}
-          allGames={this.allGames.bind(this)}
-          totalTime={this.state.totalTime}
-          sort={this.sort.bind(this)}
-        />
-        <GameCollection itemsFit={this.state.itemsFitMutable} onClick={this.checkForSelection} />
-      </div>
+        <Sidebar totalTime={this.state.totalTime} />
+        <Wrapper>
+          <Search
+            nick={this.state.nick}
+            time={this.state.time}
+            players={this.state.players}
+            onChange={this.handleChange}
+            onClick={this.handleClick.bind(this)}
+            init={this.init.bind(this)}
+          />
+          <ButtonsSection
+            checkIfPlayed={this.checkIfPlayed.bind(this)}
+            randomGame={this.randomGame.bind(this)}
+            isVisible={this.state.isVisible}
+            allGames={this.allGames.bind(this)}
+            totalTime={this.state.totalTime}
+            sort={this.sort.bind(this)}
+          />
+          {this.state.isVisible ? (
+            <GameCollection
+              itemsFit={this.state.itemsFitMutable}
+              onClick={this.checkForSelection}
+            />
+          ) : null}
+        </Wrapper>
+      </AppTemplate>
     );
   }
 }

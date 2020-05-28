@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -15,10 +15,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const GridTemplate = ({ children }) => <StyledWrapper>{children}</StyledWrapper>;
+const GamesTemplate = ({ children }) => <StyledWrapper>{children}</StyledWrapper>;
 
-GridTemplate.propTypes = {
+GamesTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
 };
 
-export default GridTemplate;
+export default GamesTemplate;

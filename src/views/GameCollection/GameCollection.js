@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SingleGame from 'views/SingleGame/SingleGame';
-import GridTemplate from 'Components/templates/GridTemplate';
+import GamesTemplate from 'Components/templates/GamesTemplate';
 
 const GameCollection = props => (
-  <GridTemplate>
+  <GamesTemplate>
     {props.itemsFit.map(item => (
       <SingleGame
         key={item.name._text}
@@ -21,7 +21,7 @@ const GameCollection = props => (
         onClick={props.onClick}
       />
     ))}
-  </GridTemplate>
+  </GamesTemplate>
 );
 
 GameCollection.propTypes = {
