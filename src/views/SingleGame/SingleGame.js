@@ -48,13 +48,13 @@ class SingleGame extends Component {
     isClicked: false,
   };
 
-  toggleClick(time) {
+  toggleClick(time, title) {
     this.setState(
       prevState => ({
         isClicked: !prevState.isClicked,
       }),
       () => {
-        this.props.onClick(this.state.isClicked, time);
+        this.props.selectItem(this.state.isClicked, time, title);
       },
     );
   }
@@ -66,7 +66,7 @@ class SingleGame extends Component {
     return (
       <StyledWrapper isClicked={isClicked}>
         <Image image={src} />
-        <StyledButton isClicked={isClicked} onClick={() => this.toggleClick(time)} />
+        <StyledButton isClicked={isClicked} onClick={() => this.toggleClick(time, title)} />
         <StyledInnerWrapper>
           <Paragraph> {title} </Paragraph>
           <Paragraph time> {time} min </Paragraph>
@@ -87,7 +87,7 @@ SingleGame.propTypes = {
   playersMin: PropTypes.string.isRequired,
   playersMax: PropTypes.string.isRequired,
   numOfPlays: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  selectItem: PropTypes.func.isRequired,
 };
 
 export default SingleGame;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import SingleGame from 'views/SingleGame/SingleGame';
 import GamesTemplate from 'Components/templates/GamesTemplate';
 
@@ -18,7 +19,8 @@ const GameCollection = props => (
             ? "ouch, you didn't play this one"
             : `Number of plays: ${item.numplays._text}`
         }
-        onClick={props.onClick}
+        selectItem={props.checkForSelection}
+        isClicked={props.isClicked}
       />
     ))}
   </GamesTemplate>
@@ -26,7 +28,8 @@ const GameCollection = props => (
 
 GameCollection.propTypes = {
   itemsFit: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClick: PropTypes.func.isRequired,
+  checkForSelection: PropTypes.func.isRequired,
+  isClicked: PropTypes.bool.isRequired,
 };
 
 export default GameCollection;

@@ -20,32 +20,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       itemsFit: [],
-      itemsFitMutable: [
-        {
-          name: {
-            _text: 'Chojrak',
-          },
-          image: {
-            _text:
-              'https://vignette.wikia.nocookie.net/chojrak/images/0/0f/Wiki_background.jpg/revision/latest?cb=20130315215827&path-prefix=pl',
-          },
-          numplays: {
-            _text: 4,
-          },
-          stats: {
-            _attributes: {
-              playingtime: '120',
-              minplayers: '2',
-              maxplayers: '4',
-            },
-          },
-        },
-      ],
+      itemsPickedSidebar: [],
+      itemsFitMutable: [],
       nick: 'nicolaskim',
       players: '3',
       time: '100',
       totalTime: 0,
       isVisible: true,
+      isClicked: false,
     };
     this.checkForSelection = this.checkForSelection.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -124,16 +106,22 @@ class App extends React.Component {
       });
   }
 
-  checkForSelection(isClicked, time, e) {
-    console.log(e);
+  checkForSelection(isClicked, time, title) {
     const currentTime = parseInt(time, 10);
     const prevTime = this.state.totalTime;
+    const selectedItem = {
+      title,
+      time,
+    };
 
     const sumOfTimes = isClicked ? prevTime + currentTime : prevTime - currentTime;
 
-    this.setState({
+    this.setState(prevState => ({
       totalTime: parseInt(sumOfTimes, 10),
-    });
+      itemsPickedSidebar: isClicked
+        ? [...prevState.itemsPickedSidebar, selectedItem]
+        : prevState.itemsPickedSidebar.filter(item => item.title !== title),
+    }));
   }
 
   checkIfPlayed(e) {
@@ -280,7 +268,7 @@ class App extends React.Component {
     return (
       <AppTemplate>
         <GlobalStyle />
-        <Sidebar totalTime={this.state.totalTime} />
+        <Sidebar totalTime={this.state.totalTime} itemsArr={this.state.itemsPickedSidebar} />
         <Wrapper>
           <Search
             nick={this.state.nick}
@@ -301,7 +289,8 @@ class App extends React.Component {
           {this.state.isVisible ? (
             <GameCollection
               itemsFit={this.state.itemsFitMutable}
-              onClick={this.checkForSelection}
+              checkForSelection={this.checkForSelection}
+              isClicked={this.state.isClicked}
             />
           ) : null}
         </Wrapper>
