@@ -7,9 +7,8 @@ const Button = styled.button`
   width: ${({ buttonSection }) => (buttonSection ? '100px' : '40px')};
   height: 30px;
   font-size: 12px;
+  border: none;
   background-color: ${({ isClicked }) => (isClicked ? 'red' : 'transparent')};
-  border: 1px solid;
-  border-color: ${({ theme }) => theme.color.main};
   color: ${({ pick }) => (pick ? 'white' : 'black')};
   outline: none;
 `;

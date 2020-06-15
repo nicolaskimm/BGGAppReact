@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Raleway', sans-serif;
+        background-color: #3A3B68;
+        color: white;
     }
 `;
 

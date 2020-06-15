@@ -12,10 +12,11 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 350px;
   height: 400px;
-  background-color: #fcfcfc;
-  box-shadow: ${({ isClicked }) => (isClicked ? '0px 12px 16px 2px rgb(0, 0, 0, 0.3)' : 'none')};
+  background-color: #2d2e56;
+  box-shadow: ${({ isClicked }) =>
+    isClicked ? '11px 11px 16px -8px rgb(73, 227, 116, 0.3)' : 'none'};
   position: relative;
-  border: ${({ isClicked }) => (isClicked ? '4px solid green' : '1px solid #d1cecd')};
+  border: ${({ isClicked }) => (isClicked ? '2px solid #5BFF89' : 'none')};
   transition: 0.45s;
 `;
 
@@ -34,13 +35,13 @@ const StyledButton = styled(Button)`
   width: 60px;
   height: 60px;
   border-radius: 50px;
-  border: 5px solid white;
+  border: 1px solid white;
   transition: all 0.3s;
   background: ${({ isClicked }) => (isClicked ? `url(${check})` : `url(${plus})`)};
   background-repeat: no-repeat;
   background-size: 40%;
   background-position: 50% 50%;
-  background-color: ${({ isClicked }) => (isClicked ? 'green' : 'black')};
+  background-color: ${({ isClicked }) => (isClicked ? '#5BFF89' : '#2d2e56')};
 `;
 
 class SingleGame extends Component {

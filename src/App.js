@@ -2,13 +2,15 @@ import React from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
 import parser from 'xml-js';
+import styled from 'styled-components';
+
 import GameCollection from 'views/GameCollection/GameCollection';
 import GlobalStyle from 'theme/GlobalStyle';
 import Search from 'Components/molecules/Search/Search';
 import ButtonsSection from 'Components/molecules/ButtonsSection/ButtonsSection';
 import AppTemplate from 'Components/templates/AppTemplate';
 import Sidebar from 'Components/organisms/Sidebar/Sidebar';
-import styled from 'styled-components';
+// import WelcomeView from 'Components/molecules/WelcomeView/WelcomeView';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,7 +23,65 @@ class App extends React.Component {
     this.state = {
       itemsFit: [],
       itemsPickedSidebar: [],
-      itemsFitMutable: [],
+      itemsFitMutable: [
+        {
+          name: {
+            _text: 'Chojrak',
+          },
+          image: {
+            _text:
+              'https://vignette.wikia.nocookie.net/chojrak/images/0/0f/Wiki_background.jpg/revision/latest?cb=20130315215827&path-prefix=pl',
+          },
+          numplays: {
+            _text: 4,
+          },
+          stats: {
+            _attributes: {
+              playingtime: '120',
+              minplayers: '2',
+              maxplayers: '4',
+            },
+          },
+        },
+        {
+          name: {
+            _text: 'Buffy',
+          },
+          image: {
+            _text:
+              'https://fashionista.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQ5NDY2OTU2NTAyOTM0NTgw/buffy-the-vampire-slayer-long-red-leather-jacketjpg.jpg',
+          },
+          numplays: {
+            _text: 4,
+          },
+          stats: {
+            _attributes: {
+              playingtime: '200',
+              minplayers: '2',
+              maxplayers: '4',
+            },
+          },
+        },
+        {
+          name: {
+            _text: 'Bojack',
+          },
+          image: {
+            _text:
+              'https://internewscast.com/wp-content/uploads/2020/03/bojack-horseman-season-7-major-updates-on-the-show-you-need-to-know.jpg',
+          },
+          numplays: {
+            _text: 4,
+          },
+          stats: {
+            _attributes: {
+              playingtime: '60',
+              minplayers: '2',
+              maxplayers: '4',
+            },
+          },
+        },
+      ],
       nick: 'nicolaskim',
       players: '3',
       time: '100',
@@ -264,11 +324,24 @@ class App extends React.Component {
     }
   }
 
+  removeItem(time, title) {
+    const timeNumber = parseInt(time, 10);
+    this.setState(prevState => ({
+      itemsPickedSidebar: prevState.itemsPickedSidebar.filter(item => item.title !== title),
+      totalTime: prevState.totalTime - timeNumber,
+    }));
+  }
+
   render() {
     return (
       <AppTemplate>
         <GlobalStyle />
-        <Sidebar totalTime={this.state.totalTime} itemsArr={this.state.itemsPickedSidebar} />
+        <Sidebar
+          totalTime={this.state.totalTime}
+          time={this.state.time}
+          itemsArr={this.state.itemsPickedSidebar}
+          removeItem={this.removeItem.bind(this)}
+        />
         <Wrapper>
           <Search
             nick={this.state.nick}
