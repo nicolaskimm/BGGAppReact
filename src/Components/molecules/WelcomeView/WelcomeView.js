@@ -1,18 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Form from 'Components/molecules/Form/Form';
 
 const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 3fr;
   margin: 0;
-  padding: 0 90px;
-  width: 40vw;
   height: 100vh;
   background-color: #282954;
   color: #fcfcfc;
 `;
 
 const InnerWrapper = styled.div`
-  position: relative;
-  top: 200px;
+  height: 100vh;
+  padding: 200px 40px 0;
+
+  ${({ right }) =>
+    right &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 0 0 0;
+      color: black;
+      position: initial;
+      background-color: white;
+    `}
 `;
 
 const Heading = styled.h1`
@@ -29,17 +42,20 @@ const StyledParagraph = styled.p`
   padding: 0 40px;
 `;
 
-const WelcomeView = () => (
+const WelcomeView = ({ getFormValues }) => (
   <Wrapper>
     <InnerWrapper>
       <Heading>Boardime.</Heading>
       <StyledParagraph>
-        Boardime is an app for all board games lovers, who like many of us, have problem with
-        picking the right boxes considering number of playmates and time. You simply need to have a
-        BGG account and after writing your parameteres and nick (to BGG o course), Boardime will
-        provide you titles, that eexactly matches your requirements. Inside you will find options to
+        Boardime is an app for all board games lovers, who like many of us, has problem with picking
+        the right boxes considering number of playmates and time. You simply need to have a BGG
+        account and after writing your parameteres and nick (to BGG of course), Boardime will
+        provide you titles, that exactly matches your requirements. Inside you will find options to
         look through your collection and sort results.
       </StyledParagraph>
+    </InnerWrapper>
+    <InnerWrapper right>
+      <Form getFormValues={getFormValues} />
     </InnerWrapper>
   </Wrapper>
 );

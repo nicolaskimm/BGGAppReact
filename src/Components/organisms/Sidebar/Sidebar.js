@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   padding: 25px 30px;
   height: 100vh;
   width: 30vw;
-  background-color: #2d2e56;
+  background-color: #1f2041;
   color: white;
 `;
 
@@ -22,7 +22,7 @@ const ItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 
   &:first-child {
     color: yellow;
@@ -49,8 +49,7 @@ const StyledHeading = styled.h1`
 
 const StyledParagraph = styled.p`
   width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
+  word-wrap: break-word;
   text-overflow: ellipsis;
   font-size: 1.2em;
   margin: 0;
@@ -66,56 +65,33 @@ const StyledButton = styled.button`
   color: white;
 `;
 
-const Sidebar = ({ time }) => (
+const Sidebar = ({ time, totalTime, itemsArr, removeItem, handleLog }) => (
   <Wrapper>
     <HeadingWrapper>
       <StyledHeading> Your time:</StyledHeading>
       <StyledHeading big> {time} min</StyledHeading>
       <StyledHeading> Time of selected games:</StyledHeading>
-      <StyledHeading big>380 min</StyledHeading>
+      <StyledHeading big>{totalTime} min</StyledHeading>
     </HeadingWrapper>
-
-    <ItemWrapper>
-      <StyledButton>x</StyledButton>
-      <StyledParagraph>Chojrak</StyledParagraph>
-      <StyledParagraph time>120</StyledParagraph>
-    </ItemWrapper>
-    <ItemWrapper>
-      <StyledButton>x</StyledButton>
-      <StyledParagraph>Zamki Burgundii</StyledParagraph>
-      <StyledParagraph time>200</StyledParagraph>
-    </ItemWrapper>
-    <ItemWrapper>
-      <StyledButton>x</StyledButton>
-      <StyledParagraph> Legendary Encounters: Alien Deckboulding Game</StyledParagraph>
-      <StyledParagraph time>60</StyledParagraph>
-    </ItemWrapper>
-    <ItemWrapper>
-      <StyledButton>x</StyledButton>
-      <StyledParagraph>Xenoshyft: Onslaught</StyledParagraph>
-      <StyledParagraph time>120</StyledParagraph>
-    </ItemWrapper>
+    {itemsArr.map(item => {
+      return (
+        <ItemWrapper key={item.title}>
+          <StyledButton onClick={() => removeItem(item.time, item.title)}>x</StyledButton>
+          <StyledParagraph>{item.title}</StyledParagraph>
+          <StyledParagraph time>{item.time}</StyledParagraph>
+        </ItemWrapper>
+      );
+    })}
+    <button onClick={() => handleLog()}>back to all</button>
   </Wrapper>
 );
 
 Sidebar.propTypes = {
-  // totalTime: PropTypes.number.isRequired,
-  time: PropTypes.number.isRequired,
-  // itemsArr: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // removeItem: PropTypes.func.isRequired,
+  totalTime: PropTypes.number.isRequired,
+  time: PropTypes.string.isRequired,
+  itemsArr: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeItem: PropTypes.func.isRequired,
+  handleLog: PropTypes.func.isRequired,
 };
 
 export default Sidebar;
-
-/*
-{itemsArr.map(item => {
-  return (
-    <ItemWrapper key={item.title}>
-      <StyledButton onClick={() => removeItem(item.time, item.title)}>x</StyledButton>
-
-      <StyledParagraph>{item.title}</StyledParagraph>
-      <p>{item.time}</p>
-    </ItemWrapper>
-  );
-})}
-*/

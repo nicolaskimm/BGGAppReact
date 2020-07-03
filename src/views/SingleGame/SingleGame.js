@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 350px;
   height: 400px;
-  background-color: #2d2e56;
+  background-color: #1f2041;
   box-shadow: ${({ isClicked }) =>
     isClicked ? '11px 11px 16px -8px rgb(73, 227, 116, 0.3)' : 'none'};
   position: relative;
@@ -35,7 +35,6 @@ const StyledButton = styled(Button)`
   width: 60px;
   height: 60px;
   border-radius: 50px;
-  border: 1px solid white;
   transition: all 0.3s;
   background: ${({ isClicked }) => (isClicked ? `url(${check})` : `url(${plus})`)};
   background-repeat: no-repeat;
@@ -44,18 +43,48 @@ const StyledButton = styled(Button)`
   background-color: ${({ isClicked }) => (isClicked ? '#5BFF89' : '#2d2e56')};
 `;
 
-class SingleGame extends Component {
-  state = {
-    isClicked: false,
-  };
+/* const SingleGame = ({
+  isClicked,
+  src,
+  title,
+  time,
+  playersMax,
+  playersMin,
+  numOfPlays,
+  selectItem,
+}) => {
+  return (
+    <StyledWrapper isClicked={isClicked}>
+      <Image image={src} />
+      <StyledButton isClicked={isClicked} onClick={() => selectItem(time, title)} />
+      <StyledInnerWrapper>
+        <Paragraph> {title} </Paragraph>
+        <Paragraph time> {time} min </Paragraph>
+        <Paragraph>
+          {playersMin} - {playersMax} players
+        </Paragraph>
+        <Paragraph> {numOfPlays} </Paragraph>
+      </StyledInnerWrapper>
+    </StyledWrapper>
+  );
+};
+*/
 
-  toggleClick(time, title) {
+class SingleGame extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isClicked: false,
+    };
+  }
+
+  toggleClick(time, title, key) {
     this.setState(
       prevState => ({
         isClicked: !prevState.isClicked,
       }),
       () => {
-        this.props.selectItem(this.state.isClicked, time, title);
+        this.props.selectItem(this.state.isClicked, time, title, key);
       },
     );
   }

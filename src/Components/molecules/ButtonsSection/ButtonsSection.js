@@ -24,12 +24,7 @@ const StyledHeader = styled(Header)`
   margin: 0;
 `;
 
-const StyledSpan = styled.span`
-  font-size: 70px;
-  color: ${({ theme }) => theme.color.main};
-`;
-
-const ButtonsSection = ({ isVisible, checkIfPlayed, randomGame, allGames, totalTime, sort }) => (
+const ButtonsSection = ({ isVisible, checkIfPlayed, randomGame, allGames, sort }) => (
   <Wrapper isVisible={isVisible}>
     <InnerWrapper>
       <StyledHeader>Choose one: </StyledHeader>
@@ -70,10 +65,6 @@ const ButtonsSection = ({ isVisible, checkIfPlayed, randomGame, allGames, totalT
         sort decending
       </StyledButton>
     </InnerWrapper>
-
-    <StyledHeader totalTime>
-      Total time: <StyledSpan>{totalTime}</StyledSpan>
-    </StyledHeader>
   </Wrapper>
 );
 
@@ -82,7 +73,6 @@ ButtonsSection.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   checkIfPlayed: PropTypes.func.isRequired,
   allGames: PropTypes.func.isRequired,
-  totalTime: PropTypes.number.isRequired,
   sort: PropTypes.func.isRequired,
 };
 
